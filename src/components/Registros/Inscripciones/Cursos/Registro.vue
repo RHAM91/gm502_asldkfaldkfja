@@ -17,6 +17,10 @@
                             <b-form-input type="text" id="campo_nombre_curso" size="sm" v-model="nombre" required></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
+                            <label>Código</label>
+                            <b-form-input type="number" step="01"  size="sm" v-model="codigo" required></b-form-input>
+                        </b-col>
+                        <b-col sm="12" class="mt-3">
                             <label>Duración (meses)</label>
                             <b-form-input type="number" size="sm" v-model="duracion" required></b-form-input>
                         </b-col>
@@ -37,7 +41,8 @@ export default {
     data() {
         return {
             nombre: '',
-            duracion: 1
+            duracion: 1,
+            codigo: ''
         }
     },
     created() {
@@ -60,7 +65,8 @@ export default {
                 api: 'cursos',
                 formulario: {
                     curso: this.nombre,
-                    duracion: this.duracion
+                    duracion: this.duracion,
+                    codigo: this.codigo
                 }
             }
 
@@ -71,6 +77,7 @@ export default {
 
             document.getElementById('campo_nombre_curso').focus()
         },
+        
         ...mapActions(['insert_data', 'wse'])
     },
     mounted() {
