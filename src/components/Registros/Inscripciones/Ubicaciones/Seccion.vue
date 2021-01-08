@@ -11,16 +11,13 @@
         </p>
         <b-collapse id="collapse-3" class="mt-2">
             <b-card style="background-color: #fafafa;">
-                <div class="btn_agregar">
-                    <b-button type="button" variant="success" size="sm">Nuevo registro</b-button>
-                </div>
                 <table class="table table-bordered table-striped table-sm" style="font-size: 12px;">
                     <thead>
                         <tr>
-                            <th style="width: 80%;">
-                                Nombre
+                            <th style="width: 90%;">
+                                Módulo
                             </th>
-                            <th style="width: 20%;text-align: center;">
+                            <th style="width: 10%;text-align: center;">
                                 ...
                             </th>
                         </tr>
@@ -28,27 +25,78 @@
                     <tbody>
                         <tr>
                             <td>
-                                Registro 1
+                                Países
                             </td>
                             <td style="text-align: center;">
-                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Editar"><i class="fas fa-edit"></i></b-button>
-                                <b-button type="button" size="sm" variant="danger" style="margin-right: 5px;" title="Borrar"><i class="far fa-trash-alt"></i></b-button>
-                                <b-button type="button" size="sm" variant="warning"  title="Información"><i class="fas fa-info-circle"></i></b-button>
+                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Abrir" @click="abrir_modal_paises"><i class="fas fa-pen"></i></b-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cuidades / Departamentos
+                            </td>
+                            <td style="text-align: center;">
+                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Abrir" @click="abrir_modal_ciudades"><i class="fas fa-pen"></i></b-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Regiónes
+                            </td>
+                            <td style="text-align: center;">
+                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Abrir" @click="abrir_modal_regiones"><i class="fas fa-pen"></i></b-button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </b-card>
         </b-collapse>
+
+        <Paises v-if="modal_paises" v-on:cerrar_modal="cerrar_modal_paises"/>
+        <Ciudades v-if="modal_ciudades" v-on:cerrar_modal="cerrar_modal_ciudades" />
+        <Regiones v-if="modal_regiones" v-on:cerrar_modal="cerrar_modal_regiones" />
     </div>
 </template>
 
 <script>
+
+import Paises from './Paises/Registro.vue'
+import Ciudades from './Ciudades/Registro.vue'
+import Regiones from './Regiones/Registro.vue'
+
 export default {
     name: 'SeccionUbicacion',
+    components: {
+        Paises,
+        Ciudades,
+        Regiones
+    },
     data() {
         return {
-            btn_seccion: true
+            btn_seccion: true,
+            modal_paises: false,
+            modal_ciudades: false,
+            modal_regiones: false
+        }
+    },
+    methods: {
+        abrir_modal_paises(){
+            this.modal_paises = true
+        },
+        cerrar_modal_paises(){
+            this.modal_paises = false
+        },
+        abrir_modal_ciudades(){
+            this.modal_ciudades = true
+        },
+        cerrar_modal_ciudades(){
+            this.modal_ciudades = false
+        },
+        abrir_modal_regiones(){
+            this.modal_regiones = true
+        },
+        cerrar_modal_regiones(){
+            this.modal_regiones = false
         }
     },
 }
