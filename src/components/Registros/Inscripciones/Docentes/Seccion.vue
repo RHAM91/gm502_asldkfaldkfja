@@ -17,16 +17,16 @@
                 <table class="table table-bordered table-striped table-sm" style="font-size: 12px;">
                     <thead>
                         <tr>
-                            <th style="width: 20%;">
+                            <th style="width: 25%;">
                                 Nombre
                             </th>
-                            <th style="width: 20%">
-                                Pais
+                            <th style="width: 15%;text-align: center;">
+                                País
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 15%;text-align: center;">
                                 Teléfono
                             </th>
-                            <th style="width: 20%;">
+                            <th style="width: 25%;text-align: center;">
                                 Correo
                             </th>
                             <th style="width: 20%;text-align: center;">
@@ -39,9 +39,15 @@
                             <td>
                                 {{item.nombre}}
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="text-align: center;">
+                                {{item.pais}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{item.telefono}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{item.correo}}
+                            </td>
                             <td style="text-align: center;">
                                 <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Editar"><i class="fas fa-edit"></i></b-button>
                                 <b-button type="button" size="sm" variant="danger" style="margin-right: 5px;" title="Borrar" @click="borrar(item._id)"><i class="far fa-trash-alt"></i></b-button>
