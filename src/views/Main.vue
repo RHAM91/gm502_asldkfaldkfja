@@ -14,8 +14,8 @@
                 <!-- AQUI VAN LOS COMPONENTES -->
                
 
-                <div v-if="modulo == 'inventario-sistemas'">
-                    <InventarioTabs v-on:OpenMenu="ToggleMenu" />
+                <div v-if="modulo == 'registros'">
+                    <RegistrosTabs v-on:OpenMenu="ToggleMenu" />
                 </div>
 
 
@@ -34,8 +34,7 @@
 
 
 // MODULOS
-import InventarioTabs from '@/components/Inventarios/Tabs.vue'
-
+import RegistrosTabs from '@/components/Registros/Tabs.vue'
 
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
@@ -55,7 +54,7 @@ export default {
     components:{
         Menu,
         Loading,
-        InventarioTabs,
+        RegistrosTabs
     },
     data(){
         return{

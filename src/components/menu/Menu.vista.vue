@@ -4,14 +4,14 @@
             <div class="icono">
                 <img src="@/assets/cloud.png" style="width: 100%;" alt="">
             </div>
-            Data Center
+            GuateMúsica
         </header>
        
         <ul id="accordion" class="accordion">
             <li>
-                <div class="link"><i class="fas fa-boxes"></i>Inventarios <i class="fa fa-chevron-down"></i></div>
+                <div class="link"><i class="fas fa-file-alt"></i>Registros <i class="fa fa-chevron-down"></i></div>
                 <ul class="submenu">
-                    <li><a href="#" @click="setmodulo('inventario-sistemas')">Registros</a></li>
+                    <li><a href="#" @click="setmodulo('registros')">Inscripciónes</a></li>
                     <!-- <li><a href="#">Macbook Air</a></li> -->
                 </ul>
             </li>
@@ -148,8 +148,8 @@ export default {
     .icono{
         width: 30px;
         height: 30px;
-        margin-right: 15px;
-        margin-left: 30px;
+        margin-right: 10px;
+        margin-left: 20px;
         line-height: 40px;
     }
 
