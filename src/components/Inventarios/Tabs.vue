@@ -21,10 +21,10 @@
                     </b-col>
                     <b-col sm="12">
                         <b-tabs content-class="mt-3">
-                            <b-tab v-if="permisos.pacientes.listar" title="Productos" @click="setSubModulo('productos')" active></b-tab>
-                            <b-tab v-if="permisos.pacientes.listar" title="Crea artículo" @click="setSubModulo('creaproducto')"></b-tab>
-                            <b-tab v-if="permisos.pacientes.listar" title="Ingreso de producto" @click="setSubModulo('ingresodeproducto')"></b-tab>
-                            <b-tab v-if="permisos.pacientes.listar" title="Salida de producto" @click="setSubModulo('salidadeproducto')"></b-tab>
+                            <b-tab title="Productos" @click="setSubModulo('productos')" active></b-tab>
+                            <b-tab title="Crea artículo" @click="setSubModulo('creaproducto')"></b-tab>
+                            <b-tab title="Ingreso de producto" @click="setSubModulo('ingresodeproducto')"></b-tab>
+                            <b-tab title="Salida de producto" @click="setSubModulo('salidadeproducto')"></b-tab>
                             <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
                         </b-tabs>
                     </b-col>

@@ -12,17 +12,6 @@
                 <div class="link"><i class="fas fa-boxes"></i>Inventarios <i class="fa fa-chevron-down"></i></div>
                 <ul class="submenu">
                     <li><a href="#" @click="setmodulo('inventario-sistemas')">Registros</a></li>
-                    <li ><a href="#" @click="setmodulo('pedidos')">Pedidos</a></li>
-                    <li ><a href="#" @click="setmodulo('ordendecompra')">Orden de compra</a></li>
-                    <li ><a href="#" @click="setmodulo('configuracion')">Configuración</a></li>
-                    <!-- <li><a href="#">Macbook Air</a></li> -->
-                </ul>
-            </li>
-            <li>
-                <div class="link"><i class="fas fa-file-alt"></i>Reportes <i class="fa fa-chevron-down"></i></div>
-                <ul class="submenu">
-                    <li><a href="#" @click="setmodulo('reporte-ingresos')">Kardex</a></li>
-                    <!-- <li ><a href="#" @click="setmodulo('configuracion')">Configuración</a></li> -->
                     <!-- <li><a href="#">Macbook Air</a></li> -->
                 </ul>
             </li>

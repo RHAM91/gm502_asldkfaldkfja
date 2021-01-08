@@ -4,7 +4,6 @@ import { IP, PUERTO } from '../config/parametros'
 import axios from 'axios'
 import VuexPersist from 'vuex-persist'
 import { minix } from '../components/functions/alertas'
-import { stat } from 'fs'
 // import socket from '../config/sockets_config'
 
 Vue.use(Vuex)
@@ -16,9 +15,7 @@ const vuexPersist = new VuexPersist({
 
     token: state.token,
     permisos: state.permisos,
-    t2: state.t2,
-    carrito: state.carrito
-    //instituciones: state.instituciones
+    t2: state.t2
   }) 
 })
 
@@ -40,43 +37,15 @@ export default new Vuex.Store({
     token: '',
     t2:'',
     loading: false,
-    no_formulario: 0, // esta variable sirve para validar si el producto ya existe no borrar los datos del formulario
 
     permisos:[],
-    carrito: [],
-    cantidad_carrito: 0,
-    inventarios:[],
-    inventario_categorias: [],
-    inventario_productos: [],
-    inventario_medidas:[],
-    inventario_ubicaciones:[],
-    inventario_proveedores:[],
-    inventario_pedidos: [],
-    inventario_correos: [],
-    inventario_correos_destino: [],
-    inventario_ordenes: [],
+  
 
 
     rutas: {
         inventarios: {api: 'inventario', estado: 'set_inventarios'},
-        inventario_categorias: {api: 'categorias', estado: 'set_inventario_categorias'},
-        inventario_productos: {api: 'productos', estado: 'set_inventario_productos'},
-        inventario_medidas: {api: 'medidas', estado: 'set_inventario_medidas'},
-        inventario_ubicaciones: {api: 'ubicaciones', estado: 'set_inventario_ubicaciones'},
-        inventario_proveedores: {api: 'proveedores', estado: 'set_inventario_proveedores'},
-        inventario_pedidos: {api: 'pedidos', estado: 'set_inventario_pedidos'},
-        inventario_correos: {api: 'correos/tipo/origen', estado: 'set_inventario_correos'},
-        inventario_correos_destino: {api: 'correos/tipo/destino', estado: 'set_inventario_correos_destino'},
-        inventario_ordenes: {api: 'ordenes', estado: 'set_inventario_ordenes'}
     },
 
-    filterPacientes: {
-        query: '',
-        nocliente: '',
-        filter_revision: '',
-        filter_produccion: '',
-        filter_odts: ''
-    }
 
   },
   mutations: {
@@ -98,70 +67,6 @@ export default new Vuex.Store({
         state.permisos = data
     },
 
-
-
-
-    set_inventarios(state, data){
-        state.inventarios = data
-    },
-    set_inventario_categorias(state, data){
-        state.inventario_categorias = data
-    },
-    set_inventario_productos(state, data){
-        state.inventario_productos = data
-    },
-    set_inventario_medidas(state, data){
-        state.inventario_medidas = data
-    },
-    set_inventario_ubicaciones(state, data){
-        state.inventario_ubicaciones = data
-    },
-    set_inventario_proveedores(state, data){
-        state.inventario_proveedores = data
-    },
-    set_inventario_pedidos(state, data){
-        state.inventario_pedidos = data
-    },
-    set_inventario_correos(state, data){
-        state.inventario_correos = data
-    },
-    set_inventario_correos_destino(state, data){
-        state.inventario_correos_destino = data
-    },
-    set_inventario_ordenes(state, data){
-        state.inventario_ordenes = data
-    },
-
-
-
-
-    set_querypaciente(state, query){
-        state.filterPacientes.query = query
-    },
-    set_querypacientenocli(state, query){
-        state.filterPacientes.nocliente = query
-    },
-    set_queryodts(state, query){
-        state.filterPacientes.filter_odts = query
-    },
-    set_no_formulario(state, query){
-        state.no_formulario = query
-    },
-    set_carrito(state, query){
-        state.carrito = query
-    },
-    set_cantidad_carrito(state, query){
-        state.cantidad_carrito = query
-    },
-    set_proveedor_lista(state, query){
-        state.carrito[query.index].proveedor = query.proveedor
-    },
-    set_precio_lista(state, query){
-        state.carrito[query.index].precio = query.precio
-    },
-    set_subtotal_lista(state, query){
-        state.carrito[query.index].subtotal = query.subtotal
-    }
   },
   actions: {
     get_token({commit}, data){
@@ -173,10 +78,10 @@ export default new Vuex.Store({
 
           if (r.status == 200) {
               minix({icon: 'success', mensaje: r.data.message, tiempo: 3000})
-              commit('set_no_formulario', 0)
+              
           }else{
               minix({icon: 'info', mensaje: r.data.message, tiempo: 3000})
-              commit('set_no_formulario', 1)
+              
           }
 
           //document.getElementById(`formulario_${data.limpiar}`).reset()
@@ -280,16 +185,7 @@ export default new Vuex.Store({
 
         socket.on('actualizar', (orden)=>{
             //console.log('Esta es la orden', orden)
-            dispatch('getDatos', state.rutas.inventarios)
-            dispatch('getDatos', state.rutas.inventario_categorias)
-            dispatch('getDatos', state.rutas.inventario_productos)
-            dispatch('getDatos', state.rutas.inventario_medidas)
-            dispatch('getDatos', state.rutas.inventario_ubicaciones)
-            dispatch('getDatos', state.rutas.inventario_proveedores)
-            dispatch('getDatos', state.rutas.inventario_pedidos)
-            dispatch('getDatos', state.rutas.inventario_correos)
-            dispatch('getDatos', state.rutas.inventario_correos_destino)
-            dispatch('getDatos', state.rutas.inventario_ordenes)
+            //dispatch('getDatos', state.rutas.inventarios)
 
             commit('set_loading', true)
         })
@@ -308,104 +204,13 @@ export default new Vuex.Store({
         const { enviar } = require('@/config/sockets_config')
         enviar(modulo) // PASO 2: se pasan los datos de la ruta a la funcion enviar para que lo emita al servidor
     },
-    sumarCompra({commit, state}, data){
-
-        let numero = state.carrito[data].cantx
-        let precio = state.carrito[data].precio
-
-        numero += 1
-
-        let newnumero = state.carrito[data].cantx = numero
-
-        commit('set_cantidad_carrito', newnumero)
-
-        let subtotal = {
-            index: data,
-            subtotal: newnumero * precio
-        }
-        commit('set_subtotal_lista', subtotal)
-
-    },
-    restarCompra({commit, state}, data){
-
-        if(state.carrito[data].cantx <= 1){
-            
-        }else{
-
-            let numero = state.carrito[data].cantx
-            let precio = state.carrito[data].precio
-    
-            numero -= 1
-    
-            let newnumero = state.carrito[data].cantx = numero
-            commit('set_cantidad_carrito', newnumero)
-
-            let subtotal = {
-                index: data,
-                subtotal: newnumero * precio
-            }
-
-            commit('set_subtotal_lista', subtotal)
-
-        }
-    },
-    setProveedorLista({commit, state}, datos){
-
-        //state.carrito[datos.index].proveedor = datos.proveedor
-        commit('set_proveedor_lista', datos)
-    },
-    setPrecioLista({commit, state}, datos){
-
-        let cantidad = state.carrito[datos.index].cantx
-
-        commit('set_precio_lista', datos)
-
-        let subtotal = parseFloat(datos.precio) * parseFloat(cantidad)
-        let ninfo = {
-            index: datos.index,
-            subtotal
-        }
-
-        commit('set_subtotal_lista', ninfo)
-    }
     
     },
     getters:{
     
-    filteredPaciente (state){
-        if(state.filterPacientes.query.length > 2){
-            
-            return state.pacientes.filter(paciente => filtrar_acentos(paciente.nombre.toLowerCase()).includes(state.filterPacientes.query) && paciente.cliente == true)
-        }else{
-
-            return state.pacientes.filter(paciente =>  paciente.cliente == true)
-        }
+    
     },
-    filteredPacienteNoCli (state){
-        if(state.filterPacientes.nocliente.length > 2){
-            
-            return state.pacientes.filter(paciente => filtrar_acentos(paciente.nombre.toLowerCase()).includes(state.filterPacientes.nocliente) && paciente.cliente == false)
-        }else{
-
-            return state.pacientes.filter(paciente =>  paciente.cliente == false)
-        }
-    },
-    filteredPacientew (state){
-
-        if(state.filterPacientes.query.length > 2){
-            return state.pacientes.filter(paciente => filtrar_acentos(paciente.nombre.toLowerCase()).includes(state.filterPacientes.query))
-        }
-    },
-    filterODTs (state){
-
-        if(state.filterPacientes.filter_odts.length > 2){
-            return state.odts.filter(odt => filtrar_acentos(odt.nombre.toLowerCase()).includes(state.filterPacientes.filter_odts) || filtrar_acentos(odt.descripcion.toLowerCase()).includes(state.filterPacientes.filter_odts) || filtrar_acentos(odt.departamento.toLowerCase()).includes(state.filterPacientes.filter_odts) || filtrar_acentos(odt.etapa.toLowerCase()).includes(state.filterPacientes.filter_odts))
-        }
-
-        return state.odts
+    plugins: [vuexPersist.plugin],
+    modules: {
     }
-  },
-  plugins: [vuexPersist.plugin],
-  modules: {
-  }
 })

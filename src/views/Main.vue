@@ -18,21 +18,6 @@
                     <InventarioTabs v-on:OpenMenu="ToggleMenu" />
                 </div>
 
-                <div v-if="modulo == 'reporte-ingresos'">
-                    <ReporteTabsKardex v-on:OpenMenu="ToggleMenu"/>
-                </div>
-
-                <div v-if="modulo == 'pedidos'">
-                    <PedidosTabs v-on:OpenMenu="ToggleMenu"/>
-                </div>
-
-                <div v-if="modulo == 'ordendecompra'">
-                    <OrdenCompraTabs v-on:OpenMenu="ToggleMenu"/>
-                </div>
-
-                <div v-if="modulo == 'configuracion'">
-                    <ConfiguracionTabs v-on:OpenMenu="ToggleMenu"/>
-                </div>
 
             </div> 
 
@@ -50,10 +35,7 @@
 
 // MODULOS
 import InventarioTabs from '@/components/Inventarios/Tabs.vue'
-import ReporteTabsKardex from '@/components/Reportes/Kardex/Tabs.vue'
-import PedidosTabs from '@/components/Pedidos/Tabs.vue'
-import OrdenCompraTabs from '@/components/OrdenesDeCompra/Tabs.vue'
-import ConfiguracionTabs from '@/components/Configuracion/Tabs.vue'
+
 
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
@@ -74,10 +56,6 @@ export default {
         Menu,
         Loading,
         InventarioTabs,
-        ReporteTabsKardex,
-        PedidosTabs,
-        ConfiguracionTabs,
-        OrdenCompraTabs
     },
     data(){
         return{
@@ -146,19 +124,7 @@ export default {
         this.$store.dispatch('getPermisos', {
             token: this.$store.state.token,
             rutas:[
-                'pacientes',
-                'instituciones',
-                'medicos',
-                'departamentos',
-                'subir_archivos',
-                'odt',
-                'operarios',
-                'aparatos',
-                'reportes',
-                'abonos',
-                'aparatos',
-                'formulas',
-                'formulaElementos'
+                
             ]
         })
         
