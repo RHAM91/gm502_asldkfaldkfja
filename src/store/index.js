@@ -40,10 +40,12 @@ export default new Vuex.Store({
 
     permisos:[],
     cursos: [],
+    docentes: [],
 
 
     rutas: {
         cursos: {api: 'cursos', estado: 'set_cursos'},
+        docentes: {api: 'docentes', estado: 'set_docentes'},
     },
 
 
@@ -72,6 +74,9 @@ export default new Vuex.Store({
 
     set_cursos(state, data){
         state.cursos = data
+    },
+    set_docentes(state, data){
+        state.docentes = data
     },
 
   },
@@ -193,6 +198,7 @@ export default new Vuex.Store({
         socket.on('actualizar', (orden)=>{
             //console.log('Esta es la orden', orden)
             dispatch('getDatos', state.rutas.cursos)
+            dispatch('getDatos', state.rutas.docentes)
 
             commit('set_loading', true)
         })
