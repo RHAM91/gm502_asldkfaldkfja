@@ -39,11 +39,11 @@ export default new Vuex.Store({
     loading: false,
 
     permisos:[],
-  
+    cursos: [],
 
 
     rutas: {
-        inventarios: {api: 'inventario', estado: 'set_inventarios'},
+        cursos: {api: 'cursos', estado: 'set_cursos'},
     },
 
 
@@ -65,6 +65,13 @@ export default new Vuex.Store({
     },
     set_permisos(state, data){
         state.permisos = data
+    },
+
+
+
+
+    set_cursos(state, data){
+        state.cursos = data
     },
 
   },
@@ -185,7 +192,7 @@ export default new Vuex.Store({
 
         socket.on('actualizar', (orden)=>{
             //console.log('Esta es la orden', orden)
-            //dispatch('getDatos', state.rutas.inventarios)
+            dispatch('getDatos', state.rutas.cursos)
 
             commit('set_loading', true)
         })

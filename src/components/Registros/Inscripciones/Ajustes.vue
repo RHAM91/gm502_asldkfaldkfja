@@ -16,7 +16,7 @@
                     <b-collapse id="collapse-1" class="mt-2">
                         <b-card style="background-color: #fafafa;">
                             <div class="btn_agregar">
-                                <b-button type="button" variant="success" size="sm">Nuevo registro</b-button>
+                                <b-button type="button" variant="success" size="sm" @click="abrir_modal_cursos">Nuevo registro</b-button>
                             </div>
                             <table class="table table-bordered table-striped table-sm" style="font-size: 12px;">
                                 <thead>
@@ -30,9 +30,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="(item, index) in cursos" :key="index">
                                         <td>
-                                            Registro 1
+                                            {{item.curso}}
                                         </td>
                                         <td style="text-align: center;">
                                             <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Editar"><i class="fas fa-edit"></i></b-button>
@@ -177,22 +177,42 @@
 
             </b-col>
         </b-row>
+
+        <RegistroCurso v-if="modal_cursos" v-on:cerrar_modal_cursos="cerrar_modal_cursos"/>
+
     </b-container>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import RegistroCurso from './Cursos/Regristro_curso.vue'
+
+
+
 export default {
     name: "Ajustes",
+    components: { 
+        RegistroCurso
+    },
+    computed:{
+        ...mapState(['cursos'])
+    },
     data() {
         return {
             btn_docentes: true,
             btn_cursos: true,
             btn_ubicaciones: true,
-            btn_pastores: true
+            btn_pastores: true,
+            modal_cursos: false
         }
     },
     methods: {
-        
+        abrir_modal_cursos(){
+            this.modal_cursos = true
+        },
+        cerrar_modal_cursos(){
+            this.modal_cursos = false
+        }
     },
 }
 </script>
