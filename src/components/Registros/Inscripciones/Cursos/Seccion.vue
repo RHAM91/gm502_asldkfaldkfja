@@ -4,7 +4,7 @@
             <h4>
                 Cursos
             </h4>
-            <b-button v-b-toggle.collapse-1 variant="outline-info" size="sm" style="height: 34px;margin-top: 5px;" @click="btn_seccion = !btn_seccion">{{btn_seccion ? 'Expandir': 'Contraer'}}</b-button>
+            <b-button v-b-toggle.collapse-1 :variant="btn_seccion ? 'outline-info': 'danger'" size="sm" style="height: 34px;margin-top: 5px;" @click="btn_seccion = !btn_seccion">{{btn_seccion ? 'Expandir': 'Contraer'}}</b-button>
         </div>
         <p>
             Registro de cursos que se imparten en la academia

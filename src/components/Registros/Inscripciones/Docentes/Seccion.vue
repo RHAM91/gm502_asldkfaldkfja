@@ -4,7 +4,7 @@
             <h4>
                 Docentes
             </h4>
-            <b-button v-b-toggle.collapse-2 variant="outline-info" size="sm" style="height: 34px;margin-top: 5px;" @click="btn_seccion = !btn_seccion">{{btn_seccion ? 'Expandir': 'Contraer'}}</b-button>
+            <b-button v-b-toggle.collapse-2 :variant="btn_seccion ? 'outline-info': 'danger'" size="sm" style="height: 34px;margin-top: 5px;" @click="btn_seccion = !btn_seccion">{{btn_seccion ? 'Expandir': 'Contraer'}}</b-button>
         </div>
         <p>
             Registro de docentes
