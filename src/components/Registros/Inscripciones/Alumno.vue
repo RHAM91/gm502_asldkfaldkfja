@@ -6,6 +6,9 @@
                     <thead>
                         <tr>
                             <th style="width: 45%;">
+                                Código
+                            </th>
+                            <th style="width: 45%;">
                                 Nombre
                             </th>
                             <th style="width: 15%;text-align: center;">
