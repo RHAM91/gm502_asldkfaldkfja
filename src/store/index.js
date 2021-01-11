@@ -42,12 +42,14 @@ export default new Vuex.Store({
     cursos: [],
     docentes: [],
     paises: [],
+    ciudades: [],
 
 
     rutas: {
         cursos: {api: 'cursos', estado: 'set_cursos'},
         docentes: {api: 'docentes', estado: 'set_docentes'},
         paises: {api: 'paises', estado: 'set_paises'},
+        ciudades: {api: 'ciudades', estado: 'set_ciudades'},
     },
 
 
@@ -82,6 +84,9 @@ export default new Vuex.Store({
     },
     set_paises(state, data){
         state.paises = data
+    },
+    set_ciudades(state, data){
+        state.ciudades = data
     },
 
   },
@@ -205,6 +210,7 @@ export default new Vuex.Store({
             dispatch('getDatos', state.rutas.cursos)
             dispatch('getDatos', state.rutas.docentes)
             dispatch('getDatos', state.rutas.paises)
+            dispatch('getDatos', state.rutas.ciudades)
 
             commit('set_loading', true)
         })
