@@ -12,16 +12,19 @@
                                 Nombre
                             </th>
                             <th style="width: 15%;text-align: center;">
-                                Curso
+                                Instrumento
                             </th>
                             <th style="width: 15%;text-align: center;">
-                                País
+                                Nivel
                             </th>
                             <th style="width: 15%;text-align: center;">
-                                Región
+                                Teléfono
                             </th>
                             <th style="width: 10%;text-align: center;">
-                                ...
+                                Iglesia
+                            </th>
+                            <th style="width: 10%;text-align: center;">
+                                Pastor
                             </th>
                         </tr>
                     </thead>
