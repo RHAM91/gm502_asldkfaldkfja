@@ -35,7 +35,7 @@
                                     {{item.abreviatura}}
                                 </td>
                                 <td style="text-align: center;">
-                                    <b-button type="button" size="sm" variant="info" style="margin-right: 5px;"><i class="fas fa-pen-square"></i></b-button>
+                                    <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" @click="editar(item._id)"><i class="fas fa-pen-square"></i></b-button>
                                     <b-button type="button" size="sm" variant="danger" @click="borrar(item._id)"><i class="fas fa-trash-alt"></i></b-button>
                                 </td>
                             </tr>
@@ -44,6 +44,8 @@
                 </b-col>
             </b-row>
         </b-container>
+
+        <Editar v-if="modal_editar" :id="id" v-on:cerrarModal="cerrar_edicion"/>
     </div>
     
 </template>
@@ -51,14 +53,19 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { pregunta } from '@/components/functions/alertas'
+import Editar from './Editar.vue'
 export default {
     name: 'Lista',
+    components:{
+        Editar
+    },
     computed:{
         ...mapState(['paises'])
     },
     data() {
         return {
-            
+            modal_editar: false,
+            id: ''
         }
     },
     methods: {
@@ -79,6 +86,13 @@ export default {
                     await this.wse(this.$store.state.rutas.paises)
                 }
             })
+        },
+        editar(id){
+            this.modal_editar = true
+            this.id = id
+        },
+        cerrar_edicion(){
+            this.modal_editar = false
         },
         ...mapActions(['deleteData', 'wse'])
     },
