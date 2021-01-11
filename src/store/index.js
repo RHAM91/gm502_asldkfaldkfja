@@ -44,6 +44,7 @@ export default new Vuex.Store({
     paises: [],
     ciudades: [],
     regiones: [],
+    pastores: [],
 
 
     rutas: {
@@ -52,6 +53,7 @@ export default new Vuex.Store({
         paises: {api: 'paises', estado: 'set_paises'},
         ciudades: {api: 'ciudades', estado: 'set_ciudades'},
         regiones: {api: 'regiones', estado: 'set_regiones'},
+        pastores: {api: 'pastores', estado: 'set_pastores'},
     },
 
 
@@ -93,6 +95,10 @@ export default new Vuex.Store({
     set_ciudades(state, data){
         state.ciudades = data
     },
+    set_pastores(state, data){
+        state.pastores = data
+    },
+
 
   },
   actions: {
@@ -217,6 +223,7 @@ export default new Vuex.Store({
             dispatch('getDatos', state.rutas.paises)
             dispatch('getDatos', state.rutas.ciudades)
             dispatch('getDatos', state.rutas.regiones)
+            dispatch('getDatos', state.rutas.pastores)
 
             commit('set_loading', true)
         })
