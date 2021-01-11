@@ -43,6 +43,7 @@ export default new Vuex.Store({
     docentes: [],
     paises: [],
     ciudades: [],
+    regiones: [],
 
 
     rutas: {
@@ -50,6 +51,7 @@ export default new Vuex.Store({
         docentes: {api: 'docentes', estado: 'set_docentes'},
         paises: {api: 'paises', estado: 'set_paises'},
         ciudades: {api: 'ciudades', estado: 'set_ciudades'},
+        regiones: {api: 'regiones', estado: 'set_regiones'},
     },
 
 
@@ -71,6 +73,9 @@ export default new Vuex.Store({
     },
     set_permisos(state, data){
         state.permisos = data
+    },
+    set_regiones(state, data){
+        state.regiones = data
     },
 
 
@@ -211,6 +216,7 @@ export default new Vuex.Store({
             dispatch('getDatos', state.rutas.docentes)
             dispatch('getDatos', state.rutas.paises)
             dispatch('getDatos', state.rutas.ciudades)
+            dispatch('getDatos', state.rutas.regiones)
 
             commit('set_loading', true)
         })
