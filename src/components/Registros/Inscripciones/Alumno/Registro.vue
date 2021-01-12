@@ -145,7 +145,7 @@ export default {
                     region: this.region,
                     docente: this.docente,
                     curso: this.curso,
-                    nive: this.nivel
+                    nivel: this.nivel
                 }
             }
 

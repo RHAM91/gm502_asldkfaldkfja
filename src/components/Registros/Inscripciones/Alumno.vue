@@ -34,7 +34,7 @@
                     <tbody>
                         <tr v-for="(item, index) in alumnos" :key="index">
                             <td>
-                                502GT0001
+                                {{item.codigo}}
                             </td>
                             <td >
                                 {{item.nombre}} {{item.apellidos}}
@@ -43,7 +43,7 @@
                                 {{item.curso}}
                             </td>
                             <td style="text-align: center;">
-                                -- nivel --
+                                {{item.nivel}}
                             </td>
                             <td style="text-align: center;">
                                 {{item.telefono}}
