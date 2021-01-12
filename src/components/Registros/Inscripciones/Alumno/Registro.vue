@@ -9,60 +9,76 @@
                     <b-row>
                         <b-col sm="12" md="6" class="mt-3">
                             <label>Nombre</label>
-                            <b-form-input type="text" id="nombre_registro_alumno" v-model="nombre" size="sm"></b-form-input>
+                            <b-form-input type="text" id="nombre_registro_alumno" v-model="nombre" size="sm" required></b-form-input>
                         </b-col>
                         <b-col sm="12" md="6" class="mt-3">
                             <label>Apellidos</label>
-                            <b-form-input type="text" v-model="apellidos" size="sm"></b-form-input>
+                            <b-form-input type="text" v-model="apellidos" size="sm" required></b-form-input>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Teléfono</label>
-                            <b-form-input type="number" v-model="telefono" placeholder="+502" size="sm"></b-form-input>
+                            <b-form-input type="number" v-model="telefono" placeholder="+502" required size="sm"></b-form-input>
                         </b-col>
                         <b-col sm="12" md="8" class="mt-3">
                             <label>Correo</label>
-                            <b-form-input type="email" v-model="correo" placeholder="@" size="sm"></b-form-input>
+                            <b-form-input type="email" v-model="correo" placeholder="@" size="sm" required></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Pastor</label>
-                            <select class="form-control form-control-sm" v-model="pastor">
+                            <select class="form-control form-control-sm" v-model="pastor" required>
                                 <option value="">Seleccionar</option>
-                                <option v-for="(item, index) in pastores" :key="index" :value="item._id">{{item.nombre}} {{item.apellidos}}</option>
+                                <option v-for="(item, index) in pastores" :key="index" :value="`${item.nombre} ${item.apellidos}`">{{item.nombre}} {{item.apellidos}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>País</label>
-                            <select class="form-control form-control-sm" @change="getDepartamentosxpais" v-model="pais">
+                            <select class="form-control form-control-sm" @change="getDepartamentosxpais" v-model="pais" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in paises" :key="index" :value="item.pais">{{item.pais}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Ciudad</label>
-                            <select class="form-control form-control-sm" @change="getRegionxCiudad" v-model="ciudad">
+                            <select class="form-control form-control-sm" @change="getRegionxCiudad" v-model="ciudad" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in ciudades_array" :key="index" :value="item.ciudad">{{item.ciudad}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Región</label>
-                            <select class="form-control form-control-sm" v-model="region">
+                            <select class="form-control form-control-sm" v-model="region" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in regiones_array" :key="index" :value="item.region">{{item.region}}</option>
                             </select>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
+                        <b-col sm="12" md="4" class="mt-3">
                             <label>Docente</label>
-                            <select class="form-control form-control-sm" v-model="docente">
+                            <select class="form-control form-control-sm" v-model="docente" required>
                                 <option value="">Seleccionar</option>
-                                <option v-for="(item, index) in docentes" :key="index" :value="item._id">{{item.nombre}} {{item.apellidos}}</option>
+                                <option v-for="(item, index) in docentes" :key="index" :value="`${item.nombre} ${item.apellidos}`">{{item.nombre}} {{item.apellidos}}</option>
                             </select>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
+                        <b-col sm="12" md="4" class="mt-3">
                             <label>Curso</label>
-                            <select class="form-control form-control-sm" v-model="curso">
+                            <select class="form-control form-control-sm" v-model="curso" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
+                            </select>
+                        </b-col>
+                        <b-col sm="12" md="4" class="mt-3">
+                            <label>Nivel</label>
+                            <select class="form-control form-control-sm" v-model="nivel" required>
+                                <option value="">Seleccionar</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
                             </select>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
@@ -94,6 +110,7 @@ export default {
             region: '',
             docente: '',
             curso: '',
+            nivel: '',
             ciudades_array:[],
             regiones_array: []
 
@@ -127,7 +144,8 @@ export default {
                     ciudad: this.ciudad,
                     region: this.region,
                     docente: this.docente,
-                    curso: this.curso
+                    curso: this.curso,
+                    nive: this.nivel
                 }
             }
 
@@ -144,6 +162,7 @@ export default {
             this.region = ''
             this.docente = ''
             this.curso = ''
+            this.nivel = ''
         },
         getDepartamentosxpais(){
             this.ciudades_array = []
