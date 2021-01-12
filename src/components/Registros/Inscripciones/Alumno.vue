@@ -5,42 +5,54 @@
                 <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
                     <thead>
                         <tr>
-                            <th style="width: 45%;">
+                            <th style="width: 8%;text-align: center;">
                                 Código
                             </th>
-                            <th style="width: 45%;">
+                            <th style="width: 25%;">
                                 Nombre
                             </th>
-                            <th style="width: 15%;text-align: center;">
+                            <th style="width: 14%;text-align: center;">
                                 Instrumento
                             </th>
-                            <th style="width: 15%;text-align: center;">
+                            <th style="width: 5%;text-align: center;">
                                 Nivel
                             </th>
-                            <th style="width: 15%;text-align: center;">
+                            <th style="width: 10%;text-align: center;">
                                 Teléfono
                             </th>
-                            <th style="width: 10%;text-align: center;">
+                            <th style="width: 15%;text-align: center;">
                                 Iglesia
                             </th>
-                            <th style="width: 10%;text-align: center;">
+                            <th style="width: 15%;text-align: center;">
                                 Pastor
+                            </th>
+                            <th style="width: 8%;text-align: center;">
+                                ...
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(item, index) in alumnos" :key="index">
                             <td>
+                                502GT0001
+                            </td>
+                            <td >
                                 {{item.nombre}} {{item.apellidos}}
                             </td>
                             <td style="text-align: center;">
                                 {{item.curso}}
                             </td>
                             <td style="text-align: center;">
-                                {{item.pais}}
+                                -- nivel --
                             </td>
                             <td style="text-align: center;">
-                                {{item.region}}
+                                {{item.telefono}}
+                            </td>
+                            <td style="text-align: center;">
+                                --- iglesia ---
+                            </td>
+                            <td style="text-align: center;">
+                                {{item.pastor}}
                             </td>
                             <td style="text-align: center;">
                                 <b-button type="button" size="sm" variant="warning"><i class="fas fa-info-circle"></i></b-button>
