@@ -2,7 +2,18 @@
     <div class="contenedor_modal">
         <div class="cuerpo_modal mod_para_perfil">
             <div class="modal_banner modal_banner_perfil">
-                {{codigo}}
+                {{codigo}} 
+                <b-dropdown v-if="!btn_editar" id="dropdown-right" right text="Right align" size="sm" variant="outline-info" class="m-2"  no-caret>
+                    <template #button-content>
+                       <i class="fas fa-bars"></i>
+                    </template>
+                    <b-dropdown-item href="#" @click="editar">Editar</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="borrar">Borrar</b-dropdown-item>
+                </b-dropdown>
+                <div v-else class="botonera">
+                    <b-button  type="button" size="sm" variant="success" @click="actualizar" style="margin-right: 5px;"><i class="fas fa-save"></i></b-button>
+                    <b-button  type="button" size="sm" variant="danger" @click="editar" style="margin-right: 5px;"><i class="fas fa-ban"></i></b-button>
+                </div>
             </div>
             <div class="cuadro_fondo">
                 <div class="data_persona">
@@ -16,69 +27,93 @@
                             <b-container fluid>
                                 <b-row>
                                     <b-col sm="12" class="mt-3">
-                                        <table>
+                                        <table style="width: 100%;">
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-user"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{nombre}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="nombre"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-phone"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{telefono}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="number" size="sm" v-model="telefono"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-map-marker-alt"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{direccion}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="direccion"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-at"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{correo}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="email" size="sm" v-model="correo"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="far fa-flag"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{pais}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="pais"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-city"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{ciudad}}
                                                 </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="ciudad"></b-form-input>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-compass"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{region}}
+                                                </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="region"></b-form-input>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 28%;text-align: center;">
+                                                <td style="width: 10%;text-align: center;">
                                                     <i class="fas fa-guitar"></i>
                                                 </td>
-                                                <td style="width: 70%;">
+                                                <td v-if="!btn_editar" style="width: 90%;">
                                                     {{instrumento}}
+                                                </td>
+                                                <td v-else style="width: 90%;">
+                                                    <b-form-input type="text" size="sm" v-model="instrumento"></b-form-input>
                                                 </td>
                                             </tr>
                                         </table>
@@ -132,7 +167,8 @@
 
 import axios from 'axios'
 import {IP, PUERTO} from '@/config/parametros'
-
+import {pregunta} from '@/components/functions/alertas'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'Perfil',
@@ -145,6 +181,7 @@ export default {
     },
     data() {
         return {
+            btn_editar: false,
             codigo: '',
             nombre: '',
             telefono: '',
@@ -171,7 +208,7 @@ export default {
         async getDatos(){
             let info = await axios.get(`http://${IP}:${PUERTO}/api/alumnos/${this.id}`, this.$store.state.token)
             this.codigo = info.data.codigo
-            this.nombre = info.data.nombre + " " + info.data.apellidos
+            this.nombre = info.data.nombre
             this.telefono = info.data.telefono
             this.direccion = info.data.direccion
             this.correo = info.data.correo
@@ -182,7 +219,50 @@ export default {
             this.pastor = info.data.pastor
             this.iglesia = '--- pendiente ---'
             this.docente = info.data.docente
-        }
+        },
+        async borrar(){
+             pregunta({titulo: 'Seguro que deseas borrarlo?', texto: 'Esta acción no se puede revertir', afirmacion: 'Si, borrarlo!'}, async (i) =>{
+
+                if (i) {
+
+                    this.salir()
+
+                    let data = {
+                        api: 'alumnos',
+                        id: this.id
+                    }
+
+                    await this.deleteData(data)
+                    await this.wse(this.$store.state.rutas.alumnos)
+                }
+            })
+        },
+        async editar(){
+            this.btn_editar = !this.btn_editar
+        },
+        async actualizar(){
+            let info = {
+                api: 'alumnos',
+                id: this.id,
+                formulario: {
+                    nombre: this.nombre,
+                    telefono: this.telefono,
+                    direccion: this.direccion,
+                    correo: this.correo,
+                    pais: this.pais,
+                    ciudad: this.ciudad,
+                    region: this.region,
+                    curso: this.curso
+                }
+
+            }
+
+            await this.updateData(info)
+            await this.wse(this.$store.state.rutas.alumnos)
+
+            this.editar()
+        },
+        ...mapActions(['deleteData', 'updateData', 'wse'])
     },
     mounted() {
         this.getDatos()
@@ -193,12 +273,13 @@ export default {
 <style scoped>
     .mod_para_perfil{
         width: 700px;
-        height: 600px;
+        height: 480px;
     }
 
     .modal_banner_perfil{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding-left: 10px;
         font-weight: bold;
     }
@@ -211,13 +292,13 @@ export default {
 
     .data_persona{
         width: 100%;
-        height: 250px;
+        height: auto;
         /* border: 1px solid black; */
         display: flex;
     }
         .foto_persona{
             width: 250px;
-            height: 100%;;
+            height: 250px;;
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.1);
         }
@@ -236,6 +317,7 @@ export default {
             border-bottom: 1px solid #ebebeb;
             width: 100%;
             height: 100%;
+            padding-bottom: 23px;
         }
         .__cuerpo__{
             width: 100%;

@@ -7,21 +7,21 @@
             <b-container fluid>
                 <form @submit.prevent="guardar">
                     <b-row>
-                        <b-col sm="12" md="6" class="mt-3">
-                            <label>Nombre</label>
+                        <b-col sm="12" class="mt-3">
+                            <label>Nombre completo</label>
                             <b-form-input type="text" id="nombre_registro_alumno" v-model="nombre" size="sm" required></b-form-input>
-                        </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
-                            <label>Apellidos</label>
-                            <b-form-input type="text" v-model="apellidos" size="sm" required></b-form-input>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Teléfono</label>
                             <b-form-input type="number" v-model="telefono" placeholder="+502" required size="sm"></b-form-input>
                         </b-col>
-                        <b-col sm="12" md="8" class="mt-3">
+                        <b-col sm="12" md="4" class="mt-3">
                             <label>Correo</label>
                             <b-form-input type="email" v-model="correo" placeholder="@" size="sm" required></b-form-input>
+                        </b-col>
+                        <b-col sm="12" md="4" class="mt-3">
+                            <label>Dirección</label>
+                            <b-form-input type="text" v-model="direccion" size="sm" required></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Pastor</label>
@@ -101,9 +101,9 @@ export default {
     data() {
         return {
             nombre: '',
-            apellidos: '',
             telefono: '',
             correo: '',
+            direccion: '',
             pastor: '',
             pais: '',
             ciudad: '',
@@ -139,6 +139,7 @@ export default {
                     apellidos: this.apellidos,
                     telefono: this.telefono,
                     correo: this.correo,
+                    direccion: this.direccion,
                     pastor: this.pastor,
                     pais: this.pais,
                     ciudad: this.ciudad,
@@ -156,6 +157,7 @@ export default {
             this.apellidos = ''
             this.telefono = ''
             this.correo = ''
+            this.direccion = ''
             this.pastor = ''
             this.pais = ''
             this.ciudad = ''
