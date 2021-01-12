@@ -1,8 +1,35 @@
 <template>
     <b-container fluid>
         <b-row>
+            <b-col sm="12" class="mt-2">
+                <b-input-group size="sm">
+                    <b-input-group-prepend is-text>
+                        <b-icon icon="search"></b-icon>
+                    </b-input-group-prepend>
+                    <b-form-input type="search" v-model="search" id="clie" size="sm" placeholder="Buscar" autocomplete="off"></b-form-input>
+                </b-input-group>
+            </b-col>
+
             <b-col sm="12" class="mt-3">
-                <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
+
+                <b-table class="table-bordered table-striped" :items="r_alumnos" :fields="fields" :per-page="perPage" :current-page="currentPage" small style="font-size: 13px;">
+					<template v-slot:cell(btn) = 'row'>
+                        <div style="display: flex; justify-content:center;">
+                            <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
+                        </div>
+                        
+					</template>
+				</b-table>
+
+
+					<b-pagination
+                        v-model="currentPage"
+                        :total-rows="rows"
+                        :per-page="perPage"
+                        aria-controls="my-table"
+					></b-pagination>
+
+                <!-- <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
                     <thead>
                         <tr>
                             <th style="width: 8%;text-align: center;">
@@ -32,34 +59,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in alumnos" :key="index">
+                        <tr >
                             <td>
-                                {{item.codigo}}
+                                
                             </td>
                             <td >
-                                {{item.nombre}} {{item.apellidos}}
+                               
                             </td>
                             <td style="text-align: center;">
-                                {{item.curso}}
+                               
                             </td>
                             <td style="text-align: center;">
-                                {{item.nivel}}
+                                
                             </td>
                             <td style="text-align: center;">
-                                {{item.telefono}}
+                              
                             </td>
                             <td style="text-align: center;">
                                 --- iglesia ---
                             </td>
                             <td style="text-align: center;">
-                                {{item.pastor}}
+                               
                             </td>
                             <td style="text-align: center;">
                                 <b-button type="button" size="sm" variant="warning"><i class="fas fa-info-circle"></i></b-button>
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
             </b-col>
         </b-row>
 
@@ -75,18 +102,68 @@
 
 import Registro from './Alumno/Registro.vue'
 
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
     name: 'ListaAlumnos',
     computed:{
-        ...mapState(['alumnos'])
+        ...mapState(['alumnos']),
+        search:{
+            get(){
+                return this.$store.state.filtros.filtro_almunos
+            },
+            set(val){
+                this.$store.commit('set_filtro_alumnos', val.toLowerCase())
+            }
+        },
+        rows(){
+            return this.r_alumnos.length
+        },
+        ...mapGetters({
+            r_alumnos: 'g_filtro_alumnos'
+        })
     },
     components:{
         Registro
     },
     data() {
         return {
-            modal_registro: false
+            modal_registro: false,
+            perPage: 15,
+			currentPage: 1,
+            fields: [
+                {
+                    key: 'codigo',
+                    thStyle: 'width: 8%;',
+                },
+                {
+                    key: 'nombre',
+                    thStyle: 'width: 25%;'
+                },
+                {
+                    key: 'curso',
+                    thStyle: 'width: 14%;'
+                },
+                {
+                    key: 'nivel',
+                    thStyle: 'width: 5%;'
+                },
+                {
+                    key: 'telefono',
+                    thStyle: 'width: 10%;'
+                },
+                {
+                    key: 'iglesia',
+                    thStyle: 'width: 15%;'
+                },
+                {
+                    key: 'pastor',
+                    thStyle: 'width: 15%;'
+                },
+                {
+                    key: 'btn',
+                    thStyle: 'width: 8%;text-align:center;'
+                }
+            ]
         }
     },
     methods: {
@@ -95,6 +172,9 @@ export default {
         },
         cerrar_modal_registro(){
             this.modal_registro = false
+        },
+        modal_ficha(id){
+            console.log(id)
         }
     },
 }

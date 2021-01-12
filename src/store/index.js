@@ -58,6 +58,10 @@ export default new Vuex.Store({
         alumnos: {api: 'alumnos', estado: 'set_alumnos'},
     },
 
+    filtros:{
+        filtro_almunos: ''
+    }
+
 
   },
   mutations: {
@@ -104,6 +108,10 @@ export default new Vuex.Store({
         state.alumnos = data
     },
 
+
+    set_filtro_alumnos(state, query){
+        state.filtros.filtro_almunos = query
+    },
 
   },
   actions: {
@@ -251,7 +259,13 @@ export default new Vuex.Store({
     
     },
     getters:{
-    
+        g_filtro_alumnos(state){
+            if (state.filtros.filtro_almunos.length > 2) {
+                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos))
+            }else{
+                return state.alumnos
+            }
+        }
     
     },
     plugins: [vuexPersist.plugin],
