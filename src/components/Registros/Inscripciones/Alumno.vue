@@ -15,9 +15,8 @@
                 <b-table class="table-bordered table-striped" :items="r_alumnos" :fields="fields" :per-page="perPage" :current-page="currentPage" small style="font-size: 13px;">
 					<template v-slot:cell(btn) = 'row'>
                         <div style="display: flex; justify-content:center;">
-                            <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
+                            <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="abrir_modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
                         </div>
-                        
 					</template>
 				</b-table>
 
@@ -29,68 +28,12 @@
                         aria-controls="my-table"
 					></b-pagination>
 
-                <!-- <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
-                    <thead>
-                        <tr>
-                            <th style="width: 8%;text-align: center;">
-                                Código
-                            </th>
-                            <th style="width: 25%;">
-                                Nombre
-                            </th>
-                            <th style="width: 14%;text-align: center;">
-                                Instrumento
-                            </th>
-                            <th style="width: 5%;text-align: center;">
-                                Nivel
-                            </th>
-                            <th style="width: 10%;text-align: center;">
-                                Teléfono
-                            </th>
-                            <th style="width: 15%;text-align: center;">
-                                Iglesia
-                            </th>
-                            <th style="width: 15%;text-align: center;">
-                                Pastor
-                            </th>
-                            <th style="width: 8%;text-align: center;">
-                                ...
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr >
-                            <td>
-                                
-                            </td>
-                            <td >
-                               
-                            </td>
-                            <td style="text-align: center;">
-                               
-                            </td>
-                            <td style="text-align: center;">
-                                
-                            </td>
-                            <td style="text-align: center;">
-                              
-                            </td>
-                            <td style="text-align: center;">
-                                --- iglesia ---
-                            </td>
-                            <td style="text-align: center;">
-                               
-                            </td>
-                            <td style="text-align: center;">
-                                <b-button type="button" size="sm" variant="warning"><i class="fas fa-info-circle"></i></b-button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> -->
+                
             </b-col>
         </b-row>
 
         <Registro v-if="modal_registro" v-on:cerrar_modal="cerrar_modal_registro" />
+        <Perfil v-if="modal_perfil" :id="id" v-on:cerrar_modal="cerrar_modal_ficha" />
 
         <div class="btn_flotante_add" @click="abrir_modal_registro">
             <i class="fas fa-plus"></i>
@@ -101,6 +44,7 @@
 <script>
 
 import Registro from './Alumno/Registro.vue'
+import Perfil from './Alumno/Perfil.vue'
 
 import { mapGetters, mapState } from 'vuex'
 export default {
@@ -123,11 +67,14 @@ export default {
         })
     },
     components:{
-        Registro
+        Registro,
+        Perfil
     },
     data() {
         return {
             modal_registro: false,
+            modal_perfil: false,
+            id: '',
             perPage: 15,
 			currentPage: 1,
             fields: [
@@ -173,9 +120,16 @@ export default {
         cerrar_modal_registro(){
             this.modal_registro = false
         },
-        modal_ficha(id){
-            console.log(id)
+        abrir_modal_ficha(id){
+            this.modal_perfil = true
+            this.id = id
+        },
+        cerrar_modal_ficha(){
+            this.modal_perfil = false
         }
+    },
+    mounted() {
+        document.getElementById('clie').focus()
     },
 }
 </script>
