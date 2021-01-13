@@ -12,13 +12,13 @@
                                 {{nombre}}
                             </h2>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
+                        <b-col sm="12" class="mt-3">
                             <label>Nombre</label>
                             <b-form-input type="text" id="edit_campo_pastor" size="sm" v-model="nombre"></b-form-input>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
-                            <label>Apellidos</label>
-                            <b-form-input type="text" size="sm" v-model="apellidos"></b-form-input>
+                        <b-col sm="12"  class="mt-3">
+                            <label>Iglesia</label>
+                            <b-form-input type="text" size="sm" v-model="iglesia"></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Teléfono</label>
@@ -40,19 +40,20 @@
 
 <script>
 
-import axios from 'axios'
-import { IP, PUERTO } from '@/config/parametros'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 
 export default {
     name: 'Editar',
     props:['id'],
+    computed:{
+        ...mapState(['pastores'])
+    },
     data() {
         return {
             nombre: '',
-            apellidos: '',
             telefono: '',
+            iglesia: '',
             correo: ''
         }
     },
@@ -72,11 +73,12 @@ export default {
             }
         },
         async getDatos(){
-            let datos = await axios.get(`http://${IP}:${PUERTO}/api/pastores/${this.id}`, this.$store.state.token)
-            this.nombre = datos.data.nombre
-            this.apellidos = datos.data.apellidos
-            this.telefono = datos.data.telefono
-            this.correo = datos.data.correo
+
+            let a = this.pastores.filter(pastor => pastor._id == this.id)
+            this.nombre = a[0].nombre
+            this.telefono = a[0].telefono
+            this.iglesia = a[0].iglesia
+            this.correo = a[0].correo
         },
         async guardar(){
             let data = {
@@ -84,8 +86,8 @@ export default {
                 id: this.id,
                 formulario: {
                     nombre: this.nombre,
-                    apellidos: this.apellidos,
                     telefono: this.telefono,
+                    iglesia: this.iglesia,
                     correo: this.correo
                 }
             }

@@ -12,14 +12,14 @@
                                 Registro del Pastor
                             </h3>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
-                            <label>Nombre</label>
+                        <b-col sm="12" class="mt-3">
+                            <label>Nombre completo</label>
                             <b-form-input type="text" id="campo_nombre_pastor" size="sm" v-model="nombre" required></b-form-input>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
+                        <!-- <b-col sm="12" md="6" class="mt-3">
                             <label>Apellidos</label>
                             <b-form-input type="text"  size="sm" v-model="apellidos" required></b-form-input>
-                        </b-col>
+                        </b-col> -->
                         <b-col sm="12" class="mt-3">
                             <label>Iglesia</label>
                             <b-form-input type="text"  size="sm" v-model="iglesia" required></b-form-input>
@@ -49,7 +49,6 @@ export default {
     data() {
         return {
             nombre: '',
-            apellidos: '',
             iglesia: '',
             telefono: '',
             correo: ''
@@ -75,7 +74,6 @@ export default {
                 api: 'pastores',
                 formulario: {
                     nombre: this.nombre,
-                    apellidos: this.apellidos,
                     iglesia: this.iglesia,
                     telefono: this.telefono,
                     correo: this.correo
@@ -86,7 +84,6 @@ export default {
             await this.wse(this.$store.state.rutas.pastores)
 
             this.nombre = ''
-            this.apellidos = ''
             this.iglesia = ''
             this.telefono = ''
             this.correo = ''
