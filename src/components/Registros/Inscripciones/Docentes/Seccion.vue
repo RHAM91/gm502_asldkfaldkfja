@@ -49,7 +49,7 @@
                                 {{item.correo}}
                             </td>
                             <td style="text-align: center;">
-                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Editar"><i class="fas fa-edit"></i></b-button>
+                                <b-button type="button" size="sm" variant="info" style="margin-right: 5px;" title="Editar" @click="editar(item._id)"><i class="fas fa-edit"></i></b-button>
                                 <b-button type="button" size="sm" variant="danger" style="margin-right: 5px;" title="Borrar" @click="borrar(item._id)"><i class="far fa-trash-alt"></i></b-button>
                                 <b-button type="button" size="sm" variant="warning"  title="Información"><i class="fas fa-info-circle"></i></b-button>
                             </td>
@@ -61,6 +61,7 @@
 
 
         <Registro v-if="modal_registro" v-on:cerrar_modal="cerrar_modal" />
+        <Editar v-if="modal_editar" v-on:cerrar_modal="cerrar_modal_editar" :id="id" />
 
     </div>
 </template>
@@ -70,11 +71,13 @@ import { mapActions, mapState } from 'vuex'
 import {pregunta} from '@/components/functions/alertas'
 
 import Registro from './Registro.vue'
+import Editar from './Editar.vue'
 
 export default {
     name: 'SeccionDocentes',
     components:{
-        Registro
+        Registro,
+        Editar
     },
     computed:{
         ...mapState(['docentes'])
@@ -82,7 +85,9 @@ export default {
     data() {
         return {
             btn_seccion: true,
-            modal_registro: false
+            modal_registro: false,
+            modal_editar: false,
+            id: ''
         }
     },
     methods: {
@@ -106,7 +111,13 @@ export default {
                     await this.wse(this.$store.state.rutas.docentes)
                 }
             })
-
+        },
+        editar(id){
+            this.modal_editar = true
+            this.id = id
+        },
+        cerrar_modal_editar(){
+            this.modal_editar = false
         },
         ...mapActions(['deleteData', 'wse'])
     },

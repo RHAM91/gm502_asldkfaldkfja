@@ -12,19 +12,19 @@
                                 Registro del docente
                             </h3>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
-                            <label>Nombre</label>
+                        <b-col sm="12" class="mt-3">
+                            <label>Nombre completo</label>
                             <b-form-input type="text" id="campo_nombre_docente" size="sm" v-model="nombre" required></b-form-input>
                         </b-col>
-                        <b-col sm="12" md="6" class="mt-3">
+                        <!-- <b-col sm="12" md="6" class="mt-3">
                             <label>Apellidos</label>
                             <b-form-input type="text" step="01"  size="sm" v-model="apellidos" required></b-form-input>
-                        </b-col>
+                        </b-col> -->
                         <b-col sm="12" md="8" class="mt-3">
                             <label>País</label>
                             <select class="form-control form-control-sm" v-model="pais" required>
                                 <option value="">Selecciona</option>
-                                <option value="gt">Guatemala</option>
+                                <option v-for="(item, index) in paises" :key="index" :value="item.pais">{{item.pais}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
@@ -51,15 +51,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import moment from 'moment'
 
 export default {
     name: 'RegistroDocente',
+    computed:{
+        ...mapState(['paises'])
+    },
     data() {
         return {
             nombre: '',
-            apellidos: '',
             pais: '',
             telefono: '',
             correo: '',
@@ -86,7 +88,6 @@ export default {
                 api: 'docentes',
                 formulario: {
                     nombre: this.nombre,
-                    apellidos: this.apellidos,
                     pais: this.pais,
                     telefono: this.telefono,
                     correo: this.correo,
@@ -98,7 +99,6 @@ export default {
             await this.wse(this.$store.state.rutas.docentes)
 
             this.nombre = ''
-            this.apellidos = ''
             this.pais = ''
             this.telefono = ''
             this.correo = ''

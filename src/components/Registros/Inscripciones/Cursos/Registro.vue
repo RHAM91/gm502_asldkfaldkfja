@@ -16,10 +16,10 @@
                             <label>Nombre</label>
                             <b-form-input type="text" id="campo_nombre_curso" size="sm" v-model="nombre" required></b-form-input>
                         </b-col>
-                        <b-col sm="12" class="mt-3">
+                        <!-- <b-col sm="12" class="mt-3">
                             <label>Código</label>
                             <b-form-input type="number" step="01"  size="sm" v-model="codigo" required></b-form-input>
-                        </b-col>
+                        </b-col> -->
                         <b-col sm="12" class="mt-3">
                             <label>Duración (meses)</label>
                             <b-form-input type="number" size="sm" v-model="duracion" required></b-form-input>
@@ -42,7 +42,6 @@ export default {
         return {
             nombre: '',
             duracion: 1,
-            codigo: ''
         }
     },
     created() {
@@ -65,8 +64,7 @@ export default {
                 api: 'cursos',
                 formulario: {
                     curso: this.nombre,
-                    duracion: this.duracion,
-                    codigo: this.codigo
+                    duracion: this.duracion
                 }
             }
 
