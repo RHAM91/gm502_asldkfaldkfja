@@ -11,6 +11,8 @@
 
                 <SeccionPastores />
 
+                <SeccionIglesias />
+
             </b-col>
         </b-row>
 
@@ -26,7 +28,7 @@ import SeccionCursos from './Cursos/Seccion.vue'
 import SeccionDocumentes from './Docentes/Seccion.vue'
 import SeccionUbicaciones from './Ubicaciones/Seccion.vue'
 import SeccionPastores from './Pastores/Seccion.vue'
-
+import SeccionIglesias from './Iglesias/Seccion.vue'
 
 export default {
     name: "Ajustes",
@@ -34,7 +36,8 @@ export default {
         SeccionCursos,
         SeccionDocumentes,
         SeccionUbicaciones,
-        SeccionPastores
+        SeccionPastores,
+        SeccionIglesias
     },
     data() {
         return {

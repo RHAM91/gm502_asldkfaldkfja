@@ -46,6 +46,7 @@ export default new Vuex.Store({
     regiones: [],
     pastores: [],
     alumnos: [],
+    iglesias:[],
 
 
     rutas: {
@@ -56,6 +57,7 @@ export default new Vuex.Store({
         regiones: {api: 'regiones', estado: 'set_regiones'},
         pastores: {api: 'pastores', estado: 'set_pastores'},
         alumnos: {api: 'alumnos', estado: 'set_alumnos'},
+        iglesias: {api: 'iglesias', estado: 'set_iglesias'},
     },
 
     filtros:{
@@ -107,7 +109,9 @@ export default new Vuex.Store({
     set_alumnos(state, data){
         state.alumnos = data
     },
-
+    set_iglesias(state, data){
+        state.iglesias = data
+    },
 
     set_filtro_alumnos(state, query){
         state.filtros.filtro_almunos = query
@@ -238,6 +242,7 @@ export default new Vuex.Store({
             dispatch('getDatos', state.rutas.regiones)
             dispatch('getDatos', state.rutas.pastores)
             dispatch('getDatos', state.rutas.alumnos)
+            dispatch('getDatos', state.rutas.iglesias)
 
             commit('set_loading', true)
         })

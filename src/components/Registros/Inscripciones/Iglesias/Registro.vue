@@ -9,12 +9,12 @@
                     <b-row>
                         <b-col sm="12" class="mt-3">
                             <h3>
-                                Registro del Pastor / Encargado
+                                Registro de Iglesia
                             </h3>
                         </b-col>
                         <b-col sm="12" class="mt-3">
-                            <label>Nombre completo</label>
-                            <b-form-input type="text" id="campo_nombre_pastor" size="sm" v-model="nombre" required></b-form-input>
+                            <label>Nombre</label>
+                            <b-form-input type="text" id="campo_nombre_iglesia" size="sm" v-model="nombre" required></b-form-input>
                         </b-col>
                         <!-- <b-col sm="12" md="6" class="mt-3">
                             <label>Apellidos</label>
@@ -25,12 +25,15 @@
                             <b-form-input type="text"  size="sm" v-model="iglesia" required></b-form-input>
                         </b-col> -->
                         <b-col sm="12" class="mt-3">
-                            <label>Teléfono</label>
-                            <b-form-input type="number" size="sm" v-model="telefono" required></b-form-input>
+                            <label>Pastor</label>
+                            <select class="form-control form-control-sm" v-model="pastor" required>
+                                <option value="">Selecciona</option>
+                                <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
+                            </select>
                         </b-col>
                         <b-col sm="12" class="mt-3">
-                            <label>Correo</label>
-                            <b-form-input type="email" size="sm" v-model="correo" required></b-form-input>
+                            <label>Dirección</label>
+                            <b-form-input type="text" size="sm" v-model="direccion"></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
                             <b-button type="submit" variant="success" size="sm">Guardar</b-button>
@@ -43,14 +46,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
-    name: 'RegistroPastor',
+    name: 'RegistroIglesia',
+    computed:{
+        ...mapState(['pastores'])
+    },
     data() {
         return {
             nombre: '',
-            telefono: '',
-            correo: ''
+            pastor: '',
+            direccion: ''
         }
     },
     created() {
@@ -70,28 +76,28 @@ export default {
         },
         async guardar(){
             let data = {
-                api: 'pastores',
+                api: 'iglesias',
                 formulario: {
-                    nombre: this.nombre,
-                    telefono: this.telefono,
-                    correo: this.correo
+                    iglesia: this.nombre,
+                    pastor: this.pastor,
+                    direccion: this.direccion
                 }
             }
 
             await this.insert_data(data)
-            await this.wse(this.$store.state.rutas.pastores)
+            await this.wse(this.$store.state.rutas.iglesias)
 
             this.nombre = ''
-            this.telefono = ''
-            this.correo = ''
+            this.pastor = ''
+            this.direccion = ''
 
-            document.getElementById('campo_nombre_pastor').focus()
+            document.getElementById('campo_nombre_iglesia').focus()
         },
         
         ...mapActions(['insert_data', 'wse'])
     },
     mounted() {
-        document.getElementById('campo_nombre_pastor').focus()
+        document.getElementById('campo_nombre_iglesia').focus()
     },
 }
 </script>
