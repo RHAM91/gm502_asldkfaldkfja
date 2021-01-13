@@ -165,14 +165,15 @@
 
 <script>
 
-import axios from 'axios'
-import {IP, PUERTO} from '@/config/parametros'
 import {pregunta} from '@/components/functions/alertas'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'Perfil',
     props:['id'],
+    computed:{
+        ...mapState(['alumnos'])
+    },
     created() {
         window.addEventListener('keydown', this.doCommand)
     },
@@ -206,19 +207,20 @@ export default {
             }
         },
         async getDatos(){
-            let info = await axios.get(`http://${IP}:${PUERTO}/api/alumnos/${this.id}`, this.$store.state.token)
-            this.codigo = info.data.codigo
-            this.nombre = info.data.nombre
-            this.telefono = info.data.telefono
-            this.direccion = info.data.direccion
-            this.correo = info.data.correo
-            this.pais = info.data.pais
-            this.ciudad = info.data.ciudad
-            this.region = info.data.region
-            this.instrumento = info.data.curso
-            this.pastor = info.data.pastor
-            this.iglesia = '--- pendiente ---'
-            this.docente = info.data.docente
+        
+            let a = this.alumnos.filter(alumno => alumno._id == this.id)
+            this.codigo = a[0].codigo
+            this.nombre = a[0].nombre
+            this.telefono = a[0].telefono
+            this.direccion = a[0].direccion
+            this.correo = a[0].correo
+            this.pais = a[0].pais
+            this.ciudad = a[0].ciudad
+            this.region = a[0].region
+            this.instrumento = a[0].curso
+            this.pastor = a[0].pastor
+            this.iglesia = a[0].iglesia
+            this.docente = a[0].docente
         },
         async borrar(){
              pregunta({titulo: 'Seguro que deseas borrarlo?', texto: 'Esta acción no se puede revertir', afirmacion: 'Si, borrarlo!'}, async (i) =>{

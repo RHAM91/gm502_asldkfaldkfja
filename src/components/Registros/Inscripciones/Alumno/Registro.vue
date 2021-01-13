@@ -27,7 +27,7 @@
                             <label>Pastor</label>
                             <select class="form-control form-control-sm" v-model="pastor" required>
                                 <option value="">Seleccionar</option>
-                                <option v-for="(item, index) in pastores" :key="index" :value="`${item.nombre} ${item.apellidos}`">{{item.nombre}} {{item.apellidos}}</option>
+                                <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
