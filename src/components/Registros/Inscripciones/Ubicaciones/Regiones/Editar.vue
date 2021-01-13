@@ -42,8 +42,6 @@
 
 <script>
 
-import { IP, PUERTO } from '@/config/parametros'
-import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -65,10 +63,10 @@ export default {
             this.$emit('cerrarModal', false)
         },
         async getInfo(){
-            let i = await axios.get(`http://${IP}:${PUERTO}/api/regiones/${this.id}`, this.$store.state.token)
-            this.pais = i.data.pais
-            this.ciudad = i.data.ciudad
-            this.region = i.data.region
+            let a = this.regiones.filter(region => region._id == this.id)
+            this.pais = a[0].pais
+            this.ciudad = a[0].ciudad
+            this.region = a[0].region
         },
         async guardar(){
             let data = {

@@ -39,15 +39,13 @@
 
 <script>
 
-import { IP, PUERTO } from '@/config/parametros'
-import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'Editar',
     props:['id'],
     computed: {
-        ...mapState(['paises'])
+        ...mapState(['paises', 'ciudades'])
     },
     data() {
         return {
@@ -61,10 +59,10 @@ export default {
             this.$emit('cerrarModal', false)
         },
         async getInfo(){
-            let i = await axios.get(`http://${IP}:${PUERTO}/api/ciudades/${this.id}`, this.$store.state.token)
-            this.pais = i.data.pais
-            this.ciudad = i.data.ciudad
-            this.abreviatura = i.data.abreviatura
+            let a = this.ciudades.filter(ciudad => ciudad._id == this.id)
+            this.pais = a[0].pais
+            this.ciudad = a[0].ciudad
+            this.abreviatura = a[0].abreviatura
         },
         async guardar(){
             let data = {
