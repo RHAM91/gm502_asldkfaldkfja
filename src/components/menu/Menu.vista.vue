@@ -12,7 +12,7 @@
                 <div class="link"><i class="fas fa-file-alt"></i>Registros <i class="fa fa-chevron-down"></i></div>
                 <ul class="submenu">
                     <li><a href="#" @click="setmodulo('registros')">Inscripciónes</a></li>
-                    <!-- <li><a href="#">Macbook Air</a></li> -->
+                    <li><a href="#" @click="setmodulo('pagos')">Pagos</a></li>
                 </ul>
             </li>
             <!-- <li>

@@ -18,6 +18,9 @@
                     <RegistrosTabs v-on:OpenMenu="ToggleMenu" />
                 </div>
 
+                <div v-if="modulo == 'pagos'">
+                    <PagosTabs v-on:OpenMenu="ToggleMenu" />
+                </div>
 
             </div> 
 
@@ -35,6 +38,7 @@
 
 // MODULOS
 import RegistrosTabs from '@/components/Registros/Tabs.vue'
+import PagosTabs from '@/components/Registros/Pagos/Tabs.vue'
 
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
@@ -54,7 +58,8 @@ export default {
     components:{
         Menu,
         Loading,
-        RegistrosTabs
+        RegistrosTabs,
+        PagosTabs,
     },
     data(){
         return{

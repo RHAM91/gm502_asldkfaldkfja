@@ -1,6 +1,6 @@
 <template>
     <div class="contenedor_modal">
-        <div class="cuerpo_modal" style="height: 520px;">
+        <div class="cuerpo_modal" style="height: 680px;width: 800px">
             <div class="modal_banner dd">
                 <i class="fas fa-plus" style="margin-right: 5px;"></i>Registro alumno
             </div>
@@ -23,11 +23,18 @@
                             <label>Dirección</label>
                             <b-form-input type="text" v-model="direccion" size="sm" required></b-form-input>
                         </b-col>
-                        <b-col sm="12" class="mt-3">
+                        <b-col sm="12" md="6" class="mt-3">
                             <label>Pastor</label>
                             <select class="form-control form-control-sm" v-model="pastor" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
+                            </select>
+                        </b-col>
+                         <b-col sm="12" md="6" class="mt-3">
+                            <label>Iglesia</label>
+                            <select class="form-control form-control-sm" v-model="iglesia" required>
+                                <option value="">Seleccionar</option>
+                                <option v-for="(item, index) in iglesias" :key="index" :value="item.iglesia">{{item.iglesia}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
@@ -81,6 +88,18 @@
                                 <option value="10">10</option>
                             </select>
                         </b-col>
+                        <b-col sm="12" class="mt-3">
+                            <label>Tiene inscripción?</label>
+                            <select class="form-control form-control-sm" v-model="inscripcion">
+                                <option value="">Selecciona</option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>
+                            </select>
+                        </b-col>
+                        <b-col v-if="inscripcion == 'si'" sm="12" class="mt-3">
+                            <label>Monto de inscripción</label>
+                            <b-form-input type="number" placeholder="Q" step="0.01" size="sm"></b-form-input>
+                        </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
                             <b-button type="submit" size="sm" variant="success">Guardar</b-button>
                         </b-col>
@@ -96,15 +115,17 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'Formulario',
     computed: {
-        ...mapState(['pastores', 'paises','ciudades','docentes', 'cursos', 'regiones'])
+        ...mapState(['pastores', 'paises','ciudades','docentes', 'cursos', 'regiones', 'iglesias'])
     },
     data() {
         return {
+            inscripcion: 'no',
             nombre: '',
             telefono: '',
             correo: '',
             direccion: '',
             pastor: '',
+            iglesia: '',
             pais: '',
             ciudad: '',
             region: '',
@@ -141,6 +162,7 @@ export default {
                     correo: this.correo,
                     direccion: this.direccion,
                     pastor: this.pastor,
+                    iglesia: this.iglesia,
                     pais: this.pais,
                     ciudad: this.ciudad,
                     region: this.region,
@@ -159,6 +181,7 @@ export default {
             this.correo = ''
             this.direccion = ''
             this.pastor = ''
+            this.iglesia = ''
             this.pais = ''
             this.ciudad = ''
             this.region = ''
