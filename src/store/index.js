@@ -266,7 +266,7 @@ export default new Vuex.Store({
     getters:{
         g_filtro_alumnos(state){
             if (state.filtros.filtro_almunos.length > 2) {
-                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos))
+                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.curso.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.iglesia.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.pastor.toLowerCase()).includes(state.filtros.filtro_almunos))
             }else{
                 return state.alumnos
             }
