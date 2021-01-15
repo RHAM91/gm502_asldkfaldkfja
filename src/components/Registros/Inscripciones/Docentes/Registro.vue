@@ -29,16 +29,16 @@
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Teléfono</label>
-                            <b-form-input type="number"  size="sm" v-model="telefono" required></b-form-input>
+                            <b-form-input type="number"  size="sm" v-model="telefono" ></b-form-input>
                         </b-col>
 
                         <b-col sm="12" class="mt-3">
                             <label>Correo</label>
-                            <b-form-input type="email"  size="sm" v-model="correo" placeholder="@" required></b-form-input>
+                            <b-form-input type="email"  size="sm" v-model="correo" placeholder="@" ></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Fecha nacimiento</label>
-                            <b-form-input type="date"  size="sm" v-model="fecha_nacimiento" required></b-form-input>
+                            <b-form-input type="date"  size="sm" v-model="fecha_nacimiento" ></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
                             <b-button type="submit" variant="success" size="sm">Guardar</b-button>

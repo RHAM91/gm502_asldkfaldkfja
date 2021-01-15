@@ -9,6 +9,7 @@
                     </template>
                     <b-dropdown-item href="#" @click="editar">Editar</b-dropdown-item>
                     <b-dropdown-item href="#" @click="borrar">Borrar</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="abrir_modal_pagos">Pagos</b-dropdown-item>
                 </b-dropdown>
                 <div v-else class="botonera">
                     <b-button  type="button" size="sm" variant="success" @click="actualizar" style="margin-right: 5px;"><i class="fas fa-save"></i></b-button>
@@ -160,6 +161,9 @@
                 </div>
             </div>
         </div>
+
+        <Pagos v-if="modal_pagos" :idx="id" v-on:cerrar_modal="cerrar_modal_pagos" />
+
     </div>
 </template>
 
@@ -168,9 +172,14 @@
 import {pregunta} from '@/components/functions/alertas'
 import { mapActions, mapState } from 'vuex'
 
+import Pagos from './Pagos.vue'
+
 export default {
     name: 'Perfil',
     props:['id'],
+    components:{
+        Pagos
+    },
     computed:{
         ...mapState(['alumnos'])
     },
@@ -183,6 +192,7 @@ export default {
     data() {
         return {
             btn_editar: false,
+            modal_pagos: false,
             codigo: '',
             nombre: '',
             telefono: '',
@@ -241,6 +251,12 @@ export default {
         },
         async editar(){
             this.btn_editar = !this.btn_editar
+        },
+        abrir_modal_pagos(){
+            this.modal_pagos = true
+        },
+        cerrar_modal_pagos(){
+            this.modal_pagos = false
         },
         async actualizar(){
             let info = {

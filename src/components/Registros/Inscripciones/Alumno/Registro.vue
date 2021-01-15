@@ -17,11 +17,11 @@
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Correo</label>
-                            <b-form-input type="email" v-model="correo" placeholder="@" size="sm" required></b-form-input>
+                            <b-form-input type="email" v-model="correo" placeholder="@" size="sm" ></b-form-input>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Dirección</label>
-                            <b-form-input type="text" v-model="direccion" size="sm" required></b-form-input>
+                            <b-form-input type="text" v-model="direccion" size="sm" ></b-form-input>
                         </b-col>
                         <b-col sm="12" md="6" class="mt-3">
                             <label>Pastor</label>
@@ -53,14 +53,14 @@
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Región</label>
-                            <select class="form-control form-control-sm" v-model="region" required>
+                            <select class="form-control form-control-sm" v-model="region">
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in regiones_array" :key="index" :value="item.region">{{item.region}}</option>
                             </select>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Docente</label>
-                            <select class="form-control form-control-sm" v-model="docente" required>
+                            <select class="form-control form-control-sm" v-model="docente" >
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in docentes" :key="index" :value="`${item.nombre} ${item.apellidos}`">{{item.nombre}} {{item.apellidos}}</option>
                             </select>

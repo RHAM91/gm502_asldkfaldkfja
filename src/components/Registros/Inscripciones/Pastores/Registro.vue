@@ -26,11 +26,11 @@
                         </b-col> -->
                         <b-col sm="12" class="mt-3">
                             <label>Teléfono</label>
-                            <b-form-input type="number" size="sm" v-model="telefono" required></b-form-input>
+                            <b-form-input type="number" size="sm" v-model="telefono" ></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Correo</label>
-                            <b-form-input type="email" size="sm" v-model="correo" required></b-form-input>
+                            <b-form-input type="email" size="sm" v-model="correo" ></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
                             <b-button type="submit" variant="success" size="sm">Guardar</b-button>

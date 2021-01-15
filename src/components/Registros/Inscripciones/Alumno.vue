@@ -84,7 +84,7 @@ export default {
                 },
                 {
                     key: 'nombre',
-                    thStyle: 'width: 25%;'
+                    thStyle: 'width: 20%;'
                 },
                 {
                     key: 'curso',
@@ -104,7 +104,11 @@ export default {
                 },
                 {
                     key: 'pastor',
-                    thStyle: 'width: 15%;'
+                    thStyle: 'width: 10%;'
+                },
+                {
+                    key: 'estado',
+                    thStyle: 'width: 10%;'
                 },
                 {
                     key: 'btn',
