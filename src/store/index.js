@@ -270,6 +270,11 @@ export default new Vuex.Store({
             }else{
                 return state.alumnos
             }
+        },
+        g_filtro_busqueda_codigo_alumno(state){
+            if (state.filtros.filtro_almunos.length > 2) {
+                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.curso.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.iglesia.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.pastor.toLowerCase()).includes(state.filtros.filtro_almunos))
+            }
         }
     
     },
