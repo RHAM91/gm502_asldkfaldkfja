@@ -22,6 +22,7 @@
                     <b-col sm="12">
                         <b-tabs content-class="mt-3">
                             <b-tab title="Alumno" @click="setSubModulo('alumno')" active></b-tab>
+                            <b-tab title="Búsqueda avanzada" @click="setSubModulo('busqueda_avanzada')"></b-tab>
                             <b-tab title="Ajustes" @click="setSubModulo('ajustes')"></b-tab>
                             <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
                         </b-tabs>
@@ -35,6 +36,10 @@
                         <Ajustes />
                     </b-col>
 
+                    <b-col sm="12" v-if="submodulo == 'busqueda_avanzada'">
+                        <BusquedaAvanzada />
+                    </b-col>
+
                 </b-row>
             </b-container>
 
@@ -45,7 +50,7 @@
 <script>
 
 import Alumno from '@/components/Registros/Inscripciones/Alumno.vue'
-
+import BusquedaAvanzada from '@/components/Registros/Inscripciones/Alumno/Busqueda_avanzada.vue'
 
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
@@ -63,6 +68,7 @@ export default {
         Loading,
         Alumno,
         Ajustes,
+        BusquedaAvanzada,
     },
     data() {
         return {
