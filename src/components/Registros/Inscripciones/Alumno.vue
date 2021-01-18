@@ -166,7 +166,7 @@ export default {
         }
 
         .cuadro_estado_solvente{
-            width: 120px;
+            width: 100%;
             height: 40px;
             background-color: #88AD28;
             color: white;
@@ -177,7 +177,7 @@ export default {
         }
 
         .cuadro_estado_insolvente{
-            width: 120px;
+            width: 100%;
             height: 40px;
             background-color: red;
             color: white;
@@ -188,7 +188,7 @@ export default {
         }
 
         .cuadro_estado_inicial{
-            width: 120px;
+            width: 100%;
             height: 40px;
             background-color: #7cc6fe;
             color: white;
