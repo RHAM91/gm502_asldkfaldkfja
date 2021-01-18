@@ -10,6 +10,7 @@
                     <b-dropdown-item href="#" @click="editar">Editar</b-dropdown-item>
                     <b-dropdown-item href="#" @click="borrar">Borrar</b-dropdown-item>
                     <b-dropdown-item href="#" @click="abrir_modal_pagos">Pagos</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="deshabilitar">Deshabilitar</b-dropdown-item>
                 </b-dropdown>
                 <div v-else class="botonera">
                     <b-button  type="button" size="sm" variant="success" @click="actualizar" style="margin-right: 5px;"><i class="fas fa-save"></i></b-button>
@@ -81,7 +82,11 @@
                                                     {{pais}}
                                                 </td>
                                                 <td v-else style="width: 90%;">
-                                                    <b-form-input type="text" size="sm" v-model="pais"></b-form-input>
+                                                    <!-- <b-form-input type="text" size="sm" v-model="pais"></b-form-input> -->
+                                                    <select class="form-control form-control-sm" v-model="pais">
+                                                        <option value="">Selecciona</option>
+                                                        <option v-for="(item, index) in paises" :key="index" :value="item.pais">{{item.pais}}</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -92,7 +97,11 @@
                                                     {{ciudad}}
                                                 </td>
                                                 <td v-else style="width: 90%;">
-                                                    <b-form-input type="text" size="sm" v-model="ciudad"></b-form-input>
+                                                    <!-- <b-form-input type="text" size="sm" v-model="ciudad"></b-form-input> -->
+                                                    <select class="form-control form-control-sm" v-model="ciudad">
+                                                        <option value="">Selecciona</option>
+                                                        <option v-for="(item, index) in ciudades" :key="index" :value="item.ciudad">{{item.ciudad}}</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -103,7 +112,11 @@
                                                     {{region}}
                                                 </td>
                                                 <td v-else style="width: 90%;">
-                                                    <b-form-input type="text" size="sm" v-model="region"></b-form-input>
+                                                    <!-- <b-form-input type="text" size="sm" v-model="region"></b-form-input> -->
+                                                    <select class="form-control form-control-sm" v-model="region">
+                                                        <option value="">Selecciona</option>
+                                                        <option v-for="(item, index) in regiones" :key="index" :value="item.region">{{item.region}}</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -114,7 +127,11 @@
                                                     {{instrumento}}
                                                 </td>
                                                 <td v-else style="width: 90%;">
-                                                    <b-form-input type="text" size="sm" v-model="instrumento"></b-form-input>
+                                                    <!-- <b-form-input type="text" size="sm" v-model="instrumento"></b-form-input> -->
+                                                    <select class="form-control form-control-sm" v-model="instrumento">
+                                                        <option value="">Selecciona</option>
+                                                        <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                         </table>
@@ -181,7 +198,7 @@ export default {
         Pagos
     },
     computed:{
-        ...mapState(['alumnos'])
+        ...mapState(['alumnos', 'paises', 'ciudades', 'cursos', 'regiones'])
     },
     created() {
         window.addEventListener('keydown', this.doCommand)
@@ -249,6 +266,26 @@ export default {
                 }
             })
         },
+        async deshabilitar(){
+            pregunta({titulo: 'Seguro que deseas deshabilitar a este alumno?', texto: 'Esta acción no se puede revertir', afirmacion: 'Si, deshabilitar!'}, async (i) =>{
+
+                if (i) {
+
+                    this.salir()
+
+                    let data = {
+                        api: 'alumnos',
+                        id: this.id,
+                        formulario:{
+                            activo: false
+                        }
+                    }
+
+                    await this.updateData(data)
+                    await this.wse(this.$store.state.rutas.alumnos)
+                }
+            })
+        },
         async editar(){
             this.btn_editar = !this.btn_editar
         },
@@ -270,7 +307,7 @@ export default {
                     pais: this.pais,
                     ciudad: this.ciudad,
                     region: this.region,
-                    curso: this.curso
+                    curso: this.instrumento
                 }
 
             }

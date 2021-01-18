@@ -169,7 +169,7 @@ export default {
                     region: this.region,
                     docente: this.docente,
                     curso: this.curso,
-                    nivel: this.nivel,
+                    nivel: parseInt(this.nivel),
                     monto: this.monto
                 }
             }
