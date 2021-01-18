@@ -6,7 +6,7 @@
                     <b-input-group-prepend is-text>
                         <b-icon icon="search"></b-icon>
                     </b-input-group-prepend>
-                    <b-form-input type="search" v-model="buscar" id="campo_busqueda_pago" size="sm" placeholder="Buscar (F2 para buscar por nombre)" @keydown.113="abrir_modal_busqueda_alumno" autocomplete="off"></b-form-input>
+                    <b-form-input type="search" v-model="buscar" id="campo_busqueda_pago" size="sm" placeholder="Buscar (F2 para buscar por nombre)" @keydown.enter="ejectuar_busqueda" @keydown.113="abrir_modal_busqueda_alumno" autocomplete="off"></b-form-input>
                 </b-input-group>
             </b-col>
             <b-col sm="12" clas="mt-3" v-if="alumno_info != ''">
@@ -163,6 +163,9 @@ export default {
                 }
     
                 await this.insert_data(info)
+                this.monto = ''
+                this.mes = ''
+                this.tipodepago = ''
             }
 
         },

@@ -98,7 +98,7 @@
                         </b-col>
                         <b-col v-if="inscripcion == 'si'" sm="12" class="mt-3">
                             <label>Monto de inscripción</label>
-                            <b-form-input type="number" placeholder="Q" step="0.01" size="sm"></b-form-input>
+                            <b-form-input type="number" v-model="monto" placeholder="Q" step="0.01" size="sm"></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
                             <b-button type="submit" size="sm" variant="success">Guardar</b-button>
@@ -132,6 +132,7 @@ export default {
             docente: '',
             curso: '',
             nivel: '',
+            monto: '',
             ciudades_array:[],
             regiones_array: []
 
@@ -168,7 +169,8 @@ export default {
                     region: this.region,
                     docente: this.docente,
                     curso: this.curso,
-                    nivel: this.nivel
+                    nivel: this.nivel,
+                    monto: this.monto
                 }
             }
 

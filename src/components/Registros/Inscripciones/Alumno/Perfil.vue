@@ -162,7 +162,7 @@
             </div>
         </div>
 
-        <Pagos v-if="modal_pagos" :idx="id" v-on:cerrar_modal="cerrar_modal_pagos" />
+        <Pagos v-if="modal_pagos" :codex="codigo" v-on:cerrar_modal="cerrar_modal_pagos" />
 
     </div>
 </template>

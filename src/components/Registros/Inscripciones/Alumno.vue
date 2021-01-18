@@ -13,9 +13,15 @@
             <b-col sm="12" class="mt-3">
 
                 <b-table class="table-bordered table-striped" :items="r_alumnos" :fields="fields" :per-page="perPage" :current-page="currentPage" small style="font-size: 13px;">
-					<template v-slot:cell(btn) = 'row'>
-                        <div style="display: flex; justify-content:center;">
+					
+                    <template v-slot:cell(btn) = 'row'>
+                        <div style="display: flex; justify-content:center;align-items:center;height: 40px;">
                             <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="abrir_modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
+                        </div>
+					</template>
+                    <template v-slot:cell(estado) = 'esta'>
+                        <div :class="esta.item.estado == 'Inicial' ? 'cuadro_estado_inicial': esta.item.estado == 'Solvente' ? 'cuadro_estado_solvente': 'cuadro_estado_insolvente'">
+                            {{esta.item.estado}}
                         </div>
 					</template>
 				</b-table>
@@ -100,15 +106,15 @@ export default {
                 },
                 {
                     key: 'iglesia',
-                    thStyle: 'width: 15%;'
+                    thStyle: 'width: 15%;text-align:center;'
                 },
                 {
                     key: 'pastor',
-                    thStyle: 'width: 10%;'
+                    thStyle: 'width: 10%;text-align:center;'
                 },
                 {
                     key: 'estado',
-                    thStyle: 'width: 10%;'
+                    thStyle: 'width: 10%;text-align:center;'
                 },
                 {
                     key: 'btn',
@@ -157,5 +163,38 @@ export default {
 
         .btn_flotante_add:hover{
             background-color: #ff8811;
+        }
+
+        .cuadro_estado_solvente{
+            width: 120px;
+            height: 40px;
+            background-color: #88AD28;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .cuadro_estado_insolvente{
+            width: 120px;
+            height: 40px;
+            background-color: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .cuadro_estado_inicial{
+            width: 120px;
+            height: 40px;
+            background-color: #7cc6fe;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
         }
 </style>
