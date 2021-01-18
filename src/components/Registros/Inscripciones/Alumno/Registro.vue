@@ -100,20 +100,30 @@
                             <label>Monto de inscripción</label>
                             <b-form-input type="number" v-model="monto" placeholder="Q" step="0.01" size="sm"></b-form-input>
                         </b-col>
-                        <b-col sm="12" class="mt-3 d-flex flex-row-reverse">
+                        <b-col sm="12" class="mt-3 d-flex justify-content-between">
+                            <b-button type="button" size="sm" @click="modal_pagos" variant="outline-danger">Realizar pagos</b-button>
                             <b-button type="submit" size="sm" variant="success">Guardar</b-button>
                         </b-col>
                     </b-row>
                 </form>
             </b-container>
         </div>
+
+        <Pagos v-if="mod_pagos" />
+
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import Pagos from './Modal_Pagos.vue'
+
+
 export default {
     name: 'Formulario',
+    components:{
+        Pagos
+    },
     computed: {
         ...mapState(['pastores', 'paises','ciudades','docentes', 'cursos', 'regiones', 'iglesias'])
     },
@@ -134,7 +144,8 @@ export default {
             nivel: '',
             monto: '',
             ciudades_array:[],
-            regiones_array: []
+            regiones_array: [],
+            mod_pagos: false
 
         }
     },
@@ -170,7 +181,7 @@ export default {
                     docente: this.docente,
                     curso: this.curso,
                     nivel: parseInt(this.nivel),
-                    monto: this.monto
+                    monto: this.monto,
                 }
             }
 
@@ -220,6 +231,9 @@ export default {
                     this.regiones_array.push(data)
                 }
             }
+        },
+        modal_pagos(){
+            this.mod_pagos = true
         },
         ...mapActions(['insert_data', 'wse'])
     },
