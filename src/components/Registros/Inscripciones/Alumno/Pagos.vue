@@ -150,7 +150,7 @@ export default {
             octubre: false,
             noviembre: false,
             diciembre: false,
-            yy: '',
+            yy: moment(Date.now()).format('YYYY'),
             pagos: []
 
         }
@@ -160,7 +160,15 @@ export default {
             this.$emit('cerrar_modal', false)
         },
         async get_meses_pagados(){
-            let meses = await axios.get(`http://${IP}:${PUERTO}/api/pagos/xmes/${this.codex}`, this.$store.state.token)
+
+            this.reset_meses()
+
+            let info = {
+                codigo: this.codex,
+                yy: this.yy
+            }
+
+            let meses = await axios.post(`http://${IP}:${PUERTO}/api/pagos/xmes`, info, this.$store.state.token)
             this.pagos = meses.data
 
             meses.data.forEach(e => {
@@ -203,6 +211,21 @@ export default {
             let info = await axios.post(`http://${IP}:${PUERTO}/api/pagos/xyy`, data, this.$store.state.token)
 
             this.pagos = info.data
+            this.get_meses_pagados()
+        },
+        reset_meses(){
+            this.enero = false
+            this.febrero = false
+            this.marzo = false
+            this.abril = false
+            this.mayo = false
+            this.junio = false
+            this.julio = false
+            this.agosto = false
+            this.septiembre = false
+            this.octubre = false
+            this.noviembre = false
+            this.diciembre = false
         },
         async anular(id){
 

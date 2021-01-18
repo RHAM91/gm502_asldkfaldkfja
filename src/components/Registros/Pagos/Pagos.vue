@@ -42,11 +42,11 @@
                     </table>
                 </div>
             </b-col>
-            <b-col sm="12" md="6" class="mt-3" v-if="alumno_info != ''">
+            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
                 <label>Monto a pagar</label>
                 <b-form-input type="number" size="sm" v-model="monto" step="0.01" placeholder="Q"></b-form-input>
             </b-col>
-            <b-col sm="12" md="6" class="mt-3" v-if="alumno_info != ''">
+            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
                 <label>Mes</label>
                 <select class="form-control form-control-sm" v-model="mes">
                     <option value="">Selecciona</option>
@@ -62,6 +62,14 @@
                     <option value="octube">Octubre</option>
                     <option value="noviembre">Noviembre</option>
                     <option value="diciembre">Diciembre</option>
+                </select>
+            </b-col>
+            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
+                <label>Año</label>
+                <select class="form-control form-control-sm" v-model="year">
+                    <option value="">Selecciona</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
                 </select>
             </b-col>
             <b-col sm="12" md="6" class="mt-3" v-if="alumno_info != ''">
@@ -84,6 +92,10 @@
                 </b-col>
                 <b-col sm="12" class="mt-3" v-if="tipodepago == 'transferencia'">
                     <label>No. de transacción</label>
+                    <b-form-input type="text" size="sm" placeholder="No." v-model="deposito"></b-form-input>
+                </b-col>
+                <b-col sm="12" class="mt-3" v-if="tipodepago == 'efectivo'">
+                    <label>No. de boleta</label>
                     <b-form-input type="text" size="sm" placeholder="No." v-model="deposito"></b-form-input>
                 </b-col>
             </div>
@@ -123,7 +135,8 @@ export default {
             deposito: '',
             modal_buscar_alumnos: false,
             fecha: moment(Date.now()).format('YYYY-MM-DD'),
-            alumno_info: ''
+            alumno_info: '',
+            year: moment(Date.now()).format('YYYY')
 
         }
     },
@@ -158,18 +171,20 @@ export default {
                         mes: this.mes,
                         tipodepago: this.tipodepago,
                         deposito: this.deposito,
-                        fecha: this.fecha
+                        fecha: this.fecha,
+                        ciclo: this.year
                     }
                 }
     
                 await this.insert_data(info)
+                await this.wse(this.$store.state.rutas.alumnos)
                 this.monto = ''
                 this.mes = ''
                 this.tipodepago = ''
             }
 
         },
-        ...mapActions(['insert_data'])
+        ...mapActions(['insert_data', 'wse'])
     },
     mounted() {
         document.getElementById('campo_busqueda_pago').focus()
