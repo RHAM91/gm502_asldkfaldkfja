@@ -151,24 +151,42 @@
                                         <td style="width: 12%;">
                                             <b>Pastor:</b>
                                         </td>
-                                        <td style="88%;">
+                                        <td v-if="!btn_editar" style="88%;">
                                             {{pastor}}
+                                        </td>
+                                        <td v-else style="88%;">
+                                            <select class="form-control form-control-sm" v-model="pastor">
+                                                <option value="">Selecciona</option>
+                                                <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="width: 12%;">
                                             <b>Iglesia: </b>
                                         </td>
-                                        <td style="88%;">
+                                        <td v-if="!btn_editar" style="88%;">
                                             {{iglesia}}
+                                        </td>
+                                        <td v-else style="88%;">
+                                            <select class="form-control form-control-sm" v-model="iglesia">
+                                                <option value="">Selecciona</option>
+                                                <option v-for="(item, index) in iglesias" :key="index" :value="item.iglesia">{{item.iglesia}}</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="width: 12%;">
                                             <b>Docente: </b>
                                         </td>
-                                        <td style="88%;">
+                                        <td v-if="!btn_editar" style="88%;">
                                             {{docente}}
+                                        </td>
+                                        <td v-else style="88%;">
+                                            <select class="form-control form-control-sm" v-model="docente">
+                                                <option value="">Selecciona</option>
+                                                <option v-for="(item, index) in docentes" :key="index" :value="item.nombre">{{item.nombre}}</option>
+                                            </select>
                                         </td>
                                     </tr>
                                 </table>
@@ -198,7 +216,7 @@ export default {
         Pagos
     },
     computed:{
-        ...mapState(['alumnos', 'paises', 'ciudades', 'cursos', 'regiones'])
+        ...mapState(['alumnos', 'paises', 'ciudades', 'cursos', 'regiones', 'pastores', 'iglesias', 'docentes'])
     },
     created() {
         window.addEventListener('keydown', this.doCommand)
@@ -307,7 +325,10 @@ export default {
                     pais: this.pais,
                     ciudad: this.ciudad,
                     region: this.region,
-                    curso: this.instrumento
+                    curso: this.instrumento,
+                    pastor: this.pastor,
+                    iglesia: this.iglesia,
+                    docente: this.docente
                 }
 
             }
@@ -328,7 +349,7 @@ export default {
 <style scoped>
     .mod_para_perfil{
         width: 700px;
-        height: 480px;
+        height: 490px;
     }
 
     .modal_banner_perfil{
