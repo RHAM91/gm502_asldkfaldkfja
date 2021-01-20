@@ -23,6 +23,8 @@
                         <b-tabs content-class="mt-3">
                             <b-tab title="Alumno" @click="setSubModulo('alumno')" active></b-tab>
                             <b-tab title="Búsqueda avanzada" @click="setSubModulo('busqueda_avanzada')"></b-tab>
+                            <b-tab title="Solventes" @click="setSubModulo('solventes')"></b-tab>
+                            <b-tab title="Insolventes" @click="setSubModulo('insolventes')"></b-tab>
                             <b-tab title="Ajustes" @click="setSubModulo('ajustes')"></b-tab>
                             <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
                         </b-tabs>
@@ -40,6 +42,14 @@
                         <BusquedaAvanzada />
                     </b-col>
 
+                    <b-col sm="12" v-if="submodulo == 'solventes'">
+                        <Solventes />
+                    </b-col>
+
+                    <b-col sm="12" v-if="submodulo == 'insolventes'">
+                        <Insolventes />
+                    </b-col>
+
                 </b-row>
             </b-container>
 
@@ -51,7 +61,8 @@
 
 import Alumno from '@/components/Registros/Inscripciones/Alumno.vue'
 import BusquedaAvanzada from '@/components/Registros/Inscripciones/Alumno/Busqueda_avanzada.vue'
-
+import Solventes from './Inscripciones/Alumno/Solventes.vue'
+import Insolventes from './Inscripciones/Alumno/Insolventes.vue'
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
 
@@ -69,6 +80,8 @@ export default {
         Alumno,
         Ajustes,
         BusquedaAvanzada,
+        Solventes,
+        Insolventes
     },
     data() {
         return {

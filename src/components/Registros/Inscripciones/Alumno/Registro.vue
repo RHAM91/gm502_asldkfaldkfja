@@ -31,7 +31,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_pastores">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_pastores"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                          <b-col sm="12" md="5" class="mt-3">
                             <label>Iglesia</label>
@@ -41,7 +41,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_iglesias">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_iglesias"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>País</label>
@@ -51,7 +51,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_paises">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_paises"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>Ciudad</label>
@@ -61,7 +61,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_ciudades">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_ciudades"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>Región</label>
@@ -71,7 +71,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_regiones">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_regiones"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>Docente</label>
@@ -81,7 +81,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_docentes">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_docentes"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>Curso</label>
@@ -91,7 +91,7 @@
                             </select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_cursos">+</b-button>
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_cursos"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Nivel</label>
