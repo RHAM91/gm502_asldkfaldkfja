@@ -49,6 +49,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
     name: 'RegistroIglesia',
+    props:['externo'],
     computed:{
         ...mapState(['pastores'])
     },
@@ -92,6 +93,9 @@ export default {
             this.direccion = ''
 
             document.getElementById('campo_nombre_iglesia').focus()
+            if (this.externo) {
+                this.salir()
+            }
         },
         
         ...mapActions(['insert_data', 'wse'])

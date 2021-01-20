@@ -46,6 +46,7 @@
 import { mapActions } from 'vuex'
 export default {
     name: 'RegistroPastor',
+    props: ['externo'],
     data() {
         return {
             nombre: '',
@@ -86,6 +87,10 @@ export default {
             this.correo = ''
 
             document.getElementById('campo_nombre_pastor').focus()
+
+            if (this.externo) {
+                this.salir()
+            }
         },
         
         ...mapActions(['insert_data', 'wse'])

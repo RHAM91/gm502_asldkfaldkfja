@@ -25,20 +25,22 @@
                         </b-col>
                         <b-col sm="12" md="5" class="mt-3">
                             <label>Pastor</label>
-                            <select class="form-control form-control-sm" v-model="pastor" required>
+                            <!-- <select class="form-control form-control-sm" v-model="pastor" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
-                            </select>
+                            </select> -->
+                            <v-select :options="pastores" label="nombre" :reduce="nombre => nombre.nombre" v-model="pastor"></v-select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_pastores"><i class="fas fa-plus"></i></b-button>
                         </b-col>
                          <b-col sm="12" md="5" class="mt-3">
                             <label>Iglesia</label>
-                            <select class="form-control form-control-sm" v-model="iglesia" required>
+                            <!-- <select class="form-control form-control-sm" v-model="iglesia" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in iglesias" :key="index" :value="item.iglesia">{{item.iglesia}}</option>
-                            </select>
+                            </select> -->
+                            <v-select :options="iglesias" label="iglesia" :reduce="iglesia => iglesia.iglesia" v-model="iglesia"></v-select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_iglesias"><i class="fas fa-plus"></i></b-button>
@@ -85,10 +87,12 @@
                         </b-col>
                         <b-col sm="12" md="3" class="mt-3">
                             <label>Curso</label>
-                            <select class="form-control form-control-sm" v-model="curso" required>
+                            <!-- <select class="form-control form-control-sm" v-model="curso" required>
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
-                            </select>
+                            </select> -->
+
+                            <v-select :options="cursos" label="curso" :reduce="curso => curso.curso" v-model="curso"></v-select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_cursos"><i class="fas fa-plus"></i></b-button>
@@ -131,13 +135,14 @@
         </div>
 
         <Pagos v-if="mod_pagos" />
-        <Pastores v-if="reg_pastores" />
-        <Iglesias v-if="reg_iglesias"/>
-        <Paises v-if="reg_paises" />
-        <Ciudades v-if="reg_ciudades" />
-        <Regiones v-if="reg_regiones" />
-        <Docentes v-if="reg_docentes" />
-        <Cursos v-if="reg_cursos" />
+        <Pastores v-if="reg_pastores" v-on:cerrar_modal="cerrar_modal_pastores" :externo="true" />
+        <Iglesias v-if="reg_iglesias" v-on:cerrar_modal="cerrar_modal_iglesias" :externo="true" />
+        <Paises v-if="reg_paises" v-on:cerrar_modal="cerrar_modal_paises" :externo="true"/>
+        <Ciudades v-if="reg_ciudades" v-on:cerrar_modal="cerrar_modal_ciudades" :externo="true"/>
+        <Regiones v-if="reg_regiones" v-on:cerrar_modal="cerrar_modal_regiones" :externo="true"/>
+        <Docentes v-if="reg_docentes" v-on:cerrar_modal="cerrar_modal_docentes" :externo="true"/>
+        <Cursos v-if="reg_cursos" v-on:cerrar_modal_cursos="cerrar_modal_cursos" :externo="true"/>
+    
     </div>
 </template>
 
@@ -151,6 +156,7 @@ import Ciudades from '../Ubicaciones/Ciudades/Registro.vue'
 import Regiones from '../Ubicaciones/Regiones/Registro.vue'
 import Docentes from '../Docentes/Registro.vue'
 import Cursos from '../Cursos/Registro.vue'
+
 
 export default {
     name: 'Formulario',
@@ -285,23 +291,44 @@ export default {
         abrir_modal_pastores(){
             this.reg_pastores = true
         },
+        cerrar_modal_pastores(){
+            this.reg_pastores = false
+        },
         abrir_modal_iglesias(){
             this.reg_iglesias = true
+        },
+        cerrar_modal_iglesias(){
+            this.reg_iglesias = false
         },
         abrir_modal_paises(){
             this.reg_paises = true
         },
+        cerrar_modal_paises(){
+            this.reg_paises = false
+        },
         abrir_modal_ciudades(){
             this.reg_ciudades = true
+        },
+        cerrar_modal_ciudades(){
+            this.reg_ciudades = false
         },
         abrir_modal_regiones(){
             this.reg_regiones = true
         },
+        cerrar_modal_regiones(){
+            this.reg_regiones = false
+        },
         abrir_modal_docentes(){
             this.reg_docentes = true
         },
+        cerrar_modal_docentes(){
+            this.reg_docentes = false
+        },
         abrir_modal_cursos(){
             this.reg_cursos = true
+        },
+        cerrar_modal_cursos(){
+            this.reg_cursos = false
         },
         ...mapActions(['insert_data', 'wse'])
     },

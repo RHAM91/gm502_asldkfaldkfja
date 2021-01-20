@@ -38,6 +38,7 @@
 import { mapActions } from 'vuex'
 export default {
     name: 'RegistroCurso',
+    props:['externo'],
     data() {
         return {
             nombre: '',
@@ -74,6 +75,9 @@ export default {
             this.nombre = ''
 
             document.getElementById('campo_nombre_curso').focus()
+            if (this.externo) {
+                this.salir()
+            }
         },
         
         ...mapActions(['insert_data', 'wse'])

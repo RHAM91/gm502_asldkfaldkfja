@@ -45,6 +45,7 @@ import Lista from './Lista.vue'
 
 export default {
     name: 'Registro',
+    props:['externo'],
     components:{
         Lista
     },
@@ -89,6 +90,10 @@ export default {
             this.nombre = ''
             this.abreviatura_pais = ''
             this.codigo = ''
+
+            if (this.externo) {
+                this.salir()
+            }
 
         },
         ver_lista(){

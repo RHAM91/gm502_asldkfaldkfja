@@ -155,10 +155,11 @@
                                             {{pastor}}
                                         </td>
                                         <td v-else style="88%;">
-                                            <select class="form-control form-control-sm" v-model="pastor">
+                                            <!-- <select class="form-control form-control-sm" v-model="pastor">
                                                 <option value="">Selecciona</option>
                                                 <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
-                                            </select>
+                                            </select> -->
+                                            <v-select :options="pastores" label="nombre" :reduce="nombre => nombre.nombre" v-model="pastor"></v-select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,10 +170,11 @@
                                             {{iglesia}}
                                         </td>
                                         <td v-else style="88%;">
-                                            <select class="form-control form-control-sm" v-model="iglesia">
+                                            <!-- <select class="form-control form-control-sm" v-model="iglesia">
                                                 <option value="">Selecciona</option>
                                                 <option v-for="(item, index) in iglesias" :key="index" :value="item.iglesia">{{item.iglesia}}</option>
-                                            </select>
+                                            </select> -->
+                                            <v-select :options="iglesias" label="iglesia" :reduce="iglesia => iglesia.iglesia" v-model="iglesia"></v-select>
                                         </td>
                                     </tr>
                                     <tr>

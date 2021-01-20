@@ -3,15 +3,19 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import crono from 'vue-crono'
+import vSelect from 'vue-select'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import 'vue-select/dist/vue-select.css';
 
 
 Vue.config.productionTip = false
+
+Vue.use(vSelect)
+Vue.component("v-select", vSelect);
 
 Vue.use(crono)
 Vue.use(BootstrapVue)

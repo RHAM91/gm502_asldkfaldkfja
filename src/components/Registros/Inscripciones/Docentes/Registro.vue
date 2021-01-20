@@ -56,6 +56,7 @@ import moment from 'moment'
 
 export default {
     name: 'RegistroDocente',
+    props:['externo'],
     computed:{
         ...mapState(['paises'])
     },
@@ -105,6 +106,10 @@ export default {
             this.fecha_nacimiento = ''
 
             document.getElementById('campo_nombre_docente').focus()
+
+            if (this.externo) {
+                this.salir()
+            }
         },
         ...mapActions(['insert_data', 'wse'])
     },
