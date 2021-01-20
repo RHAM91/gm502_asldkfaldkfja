@@ -121,9 +121,13 @@
                                 <option value="no">No</option>
                             </select>
                         </b-col>
-                        <b-col v-if="inscripcion == 'si'" sm="12" class="mt-3">
+                        <b-col v-if="inscripcion == 'si'" sm="12" md="6" class="mt-3">
                             <label>Monto de inscripción</label>
                             <b-form-input type="number" v-model="monto" placeholder="Q" step="0.01" size="sm"></b-form-input>
+                        </b-col>
+                        <b-col v-if="inscripcion == 'si'" sm="12" md="6" class="mt-3">
+                            <label>No. documento</label>
+                            <b-form-input type="text" v-model="nodocins" size="sm"></b-form-input>
                         </b-col>
                         <b-col sm="12" class="mt-3 d-flex justify-content-between">
                             <b-button type="button" size="sm" @click="modal_pagos" variant="outline-danger">Realizar pagos</b-button>
@@ -189,6 +193,7 @@ export default {
             curso: '',
             nivel: '',
             monto: '',
+            nodocins:'',
             ciudades_array:[],
             regiones_array: [],
             mod_pagos: false,
@@ -235,6 +240,7 @@ export default {
                     curso: this.curso,
                     nivel: parseInt(this.nivel),
                     monto: this.monto,
+                    deposito: this.nodocins
                 }
             }
 
