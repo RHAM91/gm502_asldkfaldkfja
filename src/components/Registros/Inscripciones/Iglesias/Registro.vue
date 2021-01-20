@@ -26,10 +26,11 @@
                         </b-col> -->
                         <b-col sm="12" class="mt-3">
                             <label>Pastor</label>
-                            <select class="form-control form-control-sm" v-model="pastor" required>
+                            <!-- <select class="form-control form-control-sm" v-model="pastor" required>
                                 <option value="">Selecciona</option>
                                 <option v-for="(item, index) in pastores" :key="index" :value="item.nombre">{{item.nombre}}</option>
-                            </select>
+                            </select> -->
+                            <v-select :options="pastores" label="nombre" :reduce="nombre => nombre.nombre" v-model="pastor"></v-select>
                         </b-col>
                         <b-col sm="12" class="mt-3">
                             <label>Dirección</label>
