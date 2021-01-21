@@ -109,13 +109,13 @@ export default {
         .cuadro1{
             width: 50%;
             height: 100%;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(0,0,0);
             position: relative;
         }
         .cuadro2{
             width: 50%;
             height: 100%;
-            background-color: rgb(234, 121, 59);
+            background-color: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -126,7 +126,7 @@ export default {
             }
                 .tit{
                     text-align: center;
-                    color: white;
+                    color: black;
                 }
 
         footer{

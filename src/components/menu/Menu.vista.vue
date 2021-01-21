@@ -2,9 +2,8 @@
     <div class="sidebar">
         <header>
             <div class="icono">
-                <img src="@/assets/cloud.png" style="width: 100%;" alt="">
+                <img src="@/assets/logo1.png" style="width: 100%;" alt="">
             </div>
-            GuateMúsica
         </header>
        
         <ul id="accordion" class="accordion">
@@ -146,19 +145,19 @@ export default {
     } */
 
     .icono{
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-        margin-left: 20px;
+        width: 150px;
+        height: 150px;
         line-height: 40px;
+        padding: 8px;
     }
 
     .sidebar header{
-        padding-left: 15px;
+        height: 150px;
         font-size: 20px;
         font-weight: 700;
         color: white;
         display: flex;
+        justify-content: center;
         line-height: 48px;
         user-select: none;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
