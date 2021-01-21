@@ -4,6 +4,7 @@ import { IP, PUERTO } from '../config/parametros'
 import axios from 'axios'
 import VuexPersist from 'vuex-persist'
 import { minix } from '../components/functions/alertas'
+import { stat } from 'fs'
 // import socket from '../config/sockets_config'
 
 Vue.use(Vuex)
@@ -266,14 +267,33 @@ export default new Vuex.Store({
     getters:{
         g_filtro_alumnos(state){
             if (state.filtros.filtro_almunos.length > 2) {
-                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.curso.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.iglesia.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.pastor.toLowerCase()).includes(state.filtros.filtro_almunos))
+                
+
+                var parametro = state.filtros.filtro_almunos
+                var x = parametro.split(' ')
+                var regex = "^(?=.*\\b" + x.join("\\b)(?=.*\\b") + "\\b)"
+
+                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.curso.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
+
+                return filtro
+
             }else{
                 return state.alumnos
             }
         },
         g_filtro_busqueda_codigo_alumno(state){
+
             if (state.filtros.filtro_almunos.length > 2) {
-                return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.curso.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.iglesia.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.pastor.toLowerCase()).includes(state.filtros.filtro_almunos))
+                // return state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.codigo.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.curso.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.iglesia.toLowerCase()).includes(state.filtros.filtro_almunos) || filtrar_acentos(alumno.pastor.toLowerCase()).includes(state.filtros.filtro_almunos))
+
+                var parametro = state.filtros.filtro_almunos
+                var x = parametro.split(' ')
+                var regex = "^(?=.*\\b" + x.join("\\b)(?=.*\\b") + "\\b)"
+
+                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.curso.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
+
+                return filtro
+
             }
         },
         g_filtro_solventes(state){
