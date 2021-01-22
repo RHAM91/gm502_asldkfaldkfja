@@ -40,7 +40,7 @@
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in iglesias" :key="index" :value="item.iglesia">{{item.iglesia}}</option>
                             </select> -->
-                            <v-select :options="iglesias" label="iglesia" :reduce="iglesia => iglesia.iglesia" v-model="iglesia"></v-select>
+                            <v-select :options="iglesias_array" label="iglesia" :reduce="iglesia => iglesia.iglesia" v-model="iglesia"></v-select>
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_iglesias"><i class="fas fa-plus"></i></b-button>
@@ -81,6 +81,7 @@
                                 <option value="">Seleccionar</option>
                                 <option v-for="(item, index) in docentes" :key="index" :value="`${item.nombre} ${item.apellidos}`">{{item.nombre}} {{item.apellidos}}</option>
                             </select>
+                            <!-- <v-select :options="docentes" label="nombre" :reduce="nombre => nombre.nombre" v-model="docente"></v-select> -->
                         </b-col>
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_docentes"><i class="fas fa-plus"></i></b-button>
@@ -194,6 +195,7 @@ export default {
             nivel: '',
             monto: '',
             nodocins:'',
+            iglesias_array: [],
             ciudades_array:[],
             regiones_array: [],
             mod_pagos: false,
@@ -291,6 +293,10 @@ export default {
                 }
             }
         },
+        getIglesiasxPastor(){
+            let filtro = this.iglesias.filter(iglesia => iglesia.pastor == this.pastor)
+            this.iglesias_array = filtro
+        },
         modal_pagos(){
             this.mod_pagos = true
         },
@@ -337,6 +343,13 @@ export default {
             this.reg_cursos = false
         },
         ...mapActions(['insert_data', 'wse'])
+    },
+    watch:{
+        pastor: function(val){
+            if (val != '') {
+                this.getIglesiasxPastor()
+            }
+        }
     },
     mounted() {
         document.getElementById('nombre_registro_alumno').focus()

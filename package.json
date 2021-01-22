@@ -1,6 +1,6 @@
 {
   "name": "GuateMusica",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,8 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "deploy:win": "vue-cli-service electron:build -p always -w",
-    "build:win": "vue-cli-service electron:build --windows"
+    "build:win": "vue-cli-service electron:build --windows",
+    "build:mac": "vue-cli-service electron:build --mac"
   },
   "main": "background.js",
   "dependencies": {

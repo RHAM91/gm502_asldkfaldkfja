@@ -17,32 +17,17 @@
             <b-container fluid>
                 <b-row>
                     <b-col sm="12">
-                        <h1>Inventario</h1>
+                        <h1>Estadísticas</h1>
                     </b-col>
                     <b-col sm="12">
                         <b-tabs content-class="mt-3">
-                            <b-tab title="Productos" @click="setSubModulo('productos')" active></b-tab>
-                            <b-tab title="Crea artículo" @click="setSubModulo('creaproducto')"></b-tab>
-                            <b-tab title="Ingreso de producto" @click="setSubModulo('ingresodeproducto')"></b-tab>
-                            <b-tab title="Salida de producto" @click="setSubModulo('salidadeproducto')"></b-tab>
-                            <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
+                            <b-tab title="Escritorio" @click="setSubModulo('escritorio')" active></b-tab>
+                            <b-tab title="Búsqueda avanzada" @click="setSubModulo('busqueda_avanzada')"></b-tab>
                         </b-tabs>
                     </b-col>
 
-                    <b-col sm="12" v-if="submodulo == 'productos'">
-                        <Productos />
-                    </b-col>
-
-                    <b-col sm="12" v-if="submodulo == 'creaproducto'">
-                        <CreaProducto />
-                    </b-col>
-
-                    <b-col sm="12" v-if="submodulo == 'ingresodeproducto'">
-                        <Ingreso />
-                    </b-col>
-
-                    <b-col sm="12" v-if="submodulo == 'salidadeproducto'">
-                        <Salida />
+                    <b-col sm="12" v-if="submodulo == 'escritorio'">
+                        <Escritorio />
                     </b-col>
 
                 </b-row>
@@ -54,11 +39,7 @@
 
 <script>
 
-import Productos from '@/components/Inventarios/Productos.vue'
-import CreaProducto from '@/components/Inventarios/CreaProducto.vue'
-import Ingreso from '@/components/Inventarios/Ingreso.productos.vue'
-import Salida from '@/components/Inventarios/Salida.productos.vue'
-
+import Escritorio from '@/components/Registros/Estadisticas/Escritorio.vue'
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
 
@@ -68,19 +49,17 @@ import Loading from '@/components/varios/Loading.vue'
 import { mapState } from 'vuex'
 
 
+
 export default {
     name: "Template",
     components:{
-        Productos,
-        CreaProducto,
-        Ingreso,
-        Salida,
-        Loading
+        Loading,
+        Escritorio
     },
     data() {
         return {
             icono: true,
-            submodulo: 'productos',
+            submodulo: 'escritorio',
         }
     },
     computed: {

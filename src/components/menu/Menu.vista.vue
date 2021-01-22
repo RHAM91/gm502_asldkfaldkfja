@@ -12,6 +12,7 @@
                 <ul class="submenu">
                     <li><a href="#" @click="setmodulo('registros')">Inscripciónes</a></li>
                     <li><a href="#" @click="setmodulo('pagos')">Pagos</a></li>
+                    <li><a href="#" @click="setmodulo('estadisticas')">Estadísticas</a></li>
                 </ul>
             </li>
             <!-- <li>

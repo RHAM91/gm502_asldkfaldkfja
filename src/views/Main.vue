@@ -22,6 +22,10 @@
                     <PagosTabs v-on:OpenMenu="ToggleMenu" />
                 </div>
 
+                <div v-if="modulo == 'estadisticas'">
+                    <EstadisticasTabs v-on:OpenMenu="ToggleMenu" />
+                </div>
+
             </div> 
 
         </div>
@@ -39,7 +43,7 @@
 // MODULOS
 import RegistrosTabs from '@/components/Registros/Tabs.vue'
 import PagosTabs from '@/components/Registros/Pagos/Tabs.vue'
-
+import EstadisticasTabs from '@/components/Registros/Estadisticas/Tabs.vue'
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
 
@@ -60,6 +64,7 @@ export default {
         Loading,
         RegistrosTabs,
         PagosTabs,
+        EstadisticasTabs
     },
     data(){
         return{
