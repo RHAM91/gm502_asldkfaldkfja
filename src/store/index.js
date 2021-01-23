@@ -39,6 +39,7 @@ export default new Vuex.Store({
     t2:'',
     loading: false, // @TODO recordar eliminar ponsteriormente, se creo un nuevo loading que responde al tiempo de respuesta del API
     loading_: false,
+    data_res: [],
 
     permisos:[],
     cursos: [],
@@ -92,7 +93,9 @@ export default new Vuex.Store({
     set_regiones(state, data){
         state.regiones = data
     },
-
+    set_response_data(state, data){
+        state.data_res[data.position] = data.resp
+    },
 
 
     set_cursos(state, data){
@@ -125,6 +128,46 @@ export default new Vuex.Store({
   actions: {
     get_token({commit}, data){
         commit('set_token', data)
+    },
+    async response_data({commit, state}, data){
+        try {
+            commit('set_loading_', true)
+
+            const r = await axios.post(`http://${IP}:${PUERTO}/api/${data.api}`, data.formulario, state.token)
+
+            if (r.status == 200) {
+                commit('set_loading_', false)
+
+                if (r.data.length != 0) {
+                    
+                    let f = {
+                        resp: r.data,
+                        position: data.position
+                    }
+                    commit('set_response_data', f)
+                }else{
+                    minix({icon: 'info', mensaje: 'No hay datos', tiempo: 3000})
+                    
+                    let f = {
+                        resp: [],
+                        position: data.position
+                    }
+                    commit('set_response_data', f)
+                }
+
+            }else{
+                minix({icon: 'info', mensaje: r.data.message, tiempo: 3000})
+                
+            }
+
+            //document.getElementById(`formulario_${data.limpiar}`).reset()
+
+        } catch (e) {
+            minix({icon: 'error', mensaje: `Al parecer algo salió mal :/ (${e.response.data.e.code})`, tiempo: 3000})
+            console.table(e.response.data.e)
+
+        }
+
     },
     async insert_data({commit, state}, data){
       try {

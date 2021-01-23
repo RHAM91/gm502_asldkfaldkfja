@@ -91,11 +91,10 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { IP, PUERTO} from '@/config/parametros'
 import axios from 'axios'
 import moment from "moment";
-import { minix } from '@/components/functions/alertas'
 import Pacman from '@/components/varios/_Loading.vue'
 
 export default {
@@ -104,7 +103,7 @@ export default {
         Pacman
     },
     computed:{
-        ...mapState(['pastores', 'iglesias'])
+        ...mapState(['pastores', 'iglesias', 'data_res'])
     },
     data() {
         return {
@@ -123,31 +122,25 @@ export default {
             this.iglesias_array = filtro
         },
         async getdatos(){
-            
-            this.set_loading_(true)
 
             let info = {
-                pastor: this.pastor,
-                iglesia: this.iglesia,
-                tipodepago: this.tipodepago,
-                del: this.del,
-                al: this.al
+                api: 'pagos/reportes1',
+                position: 0,
+                formulario: {
+                    pastor: this.pastor,
+                    iglesia: this.iglesia,
+                    tipodepago: this.tipodepago,
+                    del: this.del,
+                    al: this.al
+                }
             }
 
-            
-            let d = await axios.post(`http://${IP}:${PUERTO}/api/pagos/reportes1/`, info, this.$store.state.token)
-            if (d.status == 200) {
-                this.set_loading_(false)
-            }
-            
-            if (d.data.length != 0) {
-                this.datos_pagos = d.data
-            }else{
-                minix({icon: 'info', mensaje: 'No hay datos', tiempo: 3000})
-            }
+            await this.response_data(info)
+
+            this.datos_pagos = this.data_res[0]
 
         },
-        ...mapMutations(['set_loading_'])
+        ...mapActions(['response_data'])
     },
     watch:{
         pastor: function(val){
