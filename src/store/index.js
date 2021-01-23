@@ -91,7 +91,6 @@ export default new Vuex.Store({
 
 
 
-
     set_cursos(state, data){
         state.cursos = data
     },

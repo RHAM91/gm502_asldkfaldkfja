@@ -22,7 +22,7 @@
                     <b-col sm="12">
                         <b-tabs content-class="mt-3">
                             <b-tab title="Pagos" @click="setSubModulo('pagos')" active></b-tab>
-                            <!-- <b-tab title="Ajustes" @click="setSubModulo('ajustes')"></b-tab> -->
+                            <b-tab title="Reportes" @click="setSubModulo('reportes')"></b-tab>
                             <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
                         </b-tabs>
                     </b-col>
@@ -31,8 +31,8 @@
                         <Pagos />
                     </b-col>
 
-                    <b-col sm="12" v-if="submodulo == 'ajustes'">
-                        
+                    <b-col sm="12" v-if="submodulo == 'reportes'">
+                        <Reportes />                
                     </b-col>
 
                 </b-row>
@@ -45,6 +45,7 @@
 <script>
 
 import Pagos from './Pagos.vue'
+import Reportes from './Reportes.vue'
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
 
@@ -59,7 +60,8 @@ export default {
     name: "Template",
     components:{
         Loading,
-        Pagos
+        Pagos,
+        Reportes
     },
     data() {
         return {
