@@ -1,16 +1,19 @@
 <template>
     <div>
-        <div v-if="accion" class="icoLoading">
+        <div v-if="loading_" class="icoLoading">
             <img src="@/assets/pacman.gif" style="width:100%;" alt="">
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
-    name: 'Loading',
-    props:['accion'],
+    name: 'Loading_',
+    computed:{
+        ...mapState(['loading_'])
+    },
 }
 </script>
 

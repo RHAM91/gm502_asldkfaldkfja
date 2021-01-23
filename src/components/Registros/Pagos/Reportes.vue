@@ -85,16 +85,17 @@
             </b-col>
         </b-row>
 
-        <Pacman :accion="loading"/>
+        <Pacman />
 
     </b-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import { IP, PUERTO} from '@/config/parametros'
 import axios from 'axios'
 import moment from "moment";
+import { minix } from '@/components/functions/alertas'
 import Pacman from '@/components/varios/_Loading.vue'
 
 export default {
@@ -113,8 +114,7 @@ export default {
             iglesias_array: [],
             datos_pagos: [],
             del: moment(Date.now()).format('YYYY-MM-DD'),
-            al: moment(Date.now()).format('YYYY-MM-DD'),
-            loading: false
+            al: moment(Date.now()).format('YYYY-MM-DD')
         }
     },
     methods: {
@@ -124,6 +124,8 @@ export default {
         },
         async getdatos(){
             
+            this.set_loading_(true)
+
             let info = {
                 pastor: this.pastor,
                 iglesia: this.iglesia,
@@ -132,14 +134,20 @@ export default {
                 al: this.al
             }
 
-            this.loading = true
+            
             let d = await axios.post(`http://${IP}:${PUERTO}/api/pagos/reportes1/`, info, this.$store.state.token)
             if (d.status == 200) {
-                this.loading = false
+                this.set_loading_(false)
             }
-            this.datos_pagos = d.data
+            
+            if (d.data.length != 0) {
+                this.datos_pagos = d.data
+            }else{
+                minix({icon: 'info', mensaje: 'No hay datos', tiempo: 3000})
+            }
 
         },
+        ...mapMutations(['set_loading_'])
     },
     watch:{
         pastor: function(val){

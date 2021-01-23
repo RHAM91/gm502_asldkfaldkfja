@@ -37,7 +37,8 @@ export default new Vuex.Store({
   state: {
     token: '',
     t2:'',
-    loading: false,
+    loading: false, // @TODO recordar eliminar ponsteriormente, se creo un nuevo loading que responde al tiempo de respuesta del API
+    loading_: false,
 
     permisos:[],
     cursos: [],
@@ -78,6 +79,9 @@ export default new Vuex.Store({
     },
     set_loading(state, data){
         state.loading = data
+    },
+    set_loading_(state, data){
+        state.loading_ = data
     },
     set_t2(state, token){
         state.t2 = token
