@@ -92,8 +92,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { IP, PUERTO} from '@/config/parametros'
-import axios from 'axios'
 import moment from "moment";
 import Pacman from '@/components/varios/_Loading.vue'
 

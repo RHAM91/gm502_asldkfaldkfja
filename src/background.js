@@ -6,6 +6,7 @@ import {
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
 import { autoUpdater } from 'electron-updater'
+import fs from 'fs'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -135,9 +136,52 @@ ipcMain.on('vale_salida', (event, args)=>{
 })
 
 
-// ipcMain.on('restart_app', () => {
-//   autoUpdater.quitAndInstall();
-// });
+ipcMain.on('foto', (event,args)=>{
+
+    let photoData = args
+
+
+    function savePhoto(filePath){
+      if(filePath){
+        fs.writeFile(filePath, photoData, 'base64', (err)=>{
+            if (err) {
+                console.log(`Hubo un problema al guardar la foto ${err.message}`)
+            }
+            photoData = null
+        })
+    }
+    }
+
+
+  dialog.showSaveDialog({
+    title: "Guardar foto",
+    defaultPath: 'myfacebomb.png',
+    buttonLabel: 'Guardar foto'
+  }).then((result)=>{
+
+    if (!result.canceled) {
+      let ruta = result.filePath
+      savePhoto(ruta)
+
+      const dialogOpts = {
+        type: 'info',
+        buttons: ['Aceptar'],
+        title: 'Información',
+        message: `Foto guardada con éxito`
+      }
+
+      dialog.showMessageBox(dialogOpts).then(({ response }) => {
+        if (response === 0) console.log('nada')
+      })
+    }
+
+
+  }).catch((err)=>{
+    console.log(err)
+  })
+
+
+})
 
 
 // Exit cleanly on request from parent process in development mode.
