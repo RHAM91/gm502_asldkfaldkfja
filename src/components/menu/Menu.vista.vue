@@ -40,8 +40,6 @@
 
 <script>
 
-import axios from 'axios'
-import { IP, PUERTO } from '@/config/parametros'
 import { mapState } from 'vuex'
 import { pregunta } from '../functions/alertas'
 

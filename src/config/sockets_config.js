@@ -7,9 +7,14 @@ const token = t != null ? t.t2 : 'nada';
 
 const socket = io.connect(`http://${IP}:${PUERTO}/?token=${token}`, {'forceNew':true });
 
+
+
 const enviar = (modulo) =>{ // PASO 3: recibe los datos de la ruta que vienen de vuex, y las emite por news a el sevidor 
    socket.emit('news', {modulo})
 }
 
 
 module.exports = {socket, enviar}
+
+
+// 30010320 Q221
