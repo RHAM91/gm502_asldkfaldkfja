@@ -16,14 +16,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
     name: 'Loading_',
     props: ['conexion'],
-    computed:{
-        ...mapState(['loading_'])
-    },
     data() {
         return {
             cool: false
