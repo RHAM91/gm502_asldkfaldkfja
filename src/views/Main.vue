@@ -31,7 +31,7 @@
         </div>
 
         <Loading />
-        <Ghost :conexion="online" />
+        <Ghost :conexion="estado" />
 
     </div>
 </template>
@@ -58,7 +58,7 @@ import Menu from '@/components/menu/Menu.vista.vue'
 import axios from 'axios'
 import { IP, PUERTO } from '../config/parametros'
 import { mapActions } from 'vuex'
-import { VueOnline } from 'vue-online-2'
+import { ipcRenderer } from 'electron'
 
 export default {
     name: 'Main',
@@ -70,16 +70,12 @@ export default {
         EstadisticasTabs,
         Ghost
     },
-    computed:{
-        online(){
-            return VueOnline.isOnline
-        }
-    },
     data(){
         return{
             conexion: null,
             mostrarMenu: true,
             modulo: '',
+            estado: true
         }
     },
     methods: {
@@ -147,6 +143,21 @@ export default {
 
         // TERMINA FUNCION -->
 
+        // RECONEXION
+
+        ipcRenderer.on('onLine', (event, message)=>{
+            if (message) {
+                //console.log('online')
+                this.estado = true
+            }else{
+                //console.log('offline')
+                this.estado = false
+            }
+        })
+
+
+        // -->
+
 
         this.menu_fijo()
         
@@ -163,12 +174,14 @@ export default {
         method: 'consulta'
     },
     watch:{
-        online(estado){
-            if (estado) {
+        estado(state){
+            if (state) {
                 // console.log('online')
-                this.inciando_conexion()
+                setTimeout(() => {
+                    this.inciando_conexion()
+                }, 5000);
             }else{
-                // console.log('offline')
+                //console.log('offline-watch')
             }
         }
     }
