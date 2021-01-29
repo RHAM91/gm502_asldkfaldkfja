@@ -22,9 +22,11 @@
                     <b-col sm="12">
                         <b-tabs content-class="mt-3">
                             <b-tab title="Alumno" @click="setSubModulo('alumno')" active></b-tab>
-                            <b-tab title="Búsqueda avanzada" @click="setSubModulo('busqueda_avanzada')"></b-tab>
+                            <!-- <b-tab title="Búsqueda avanzada" @click="setSubModulo('busqueda_avanzada')"></b-tab> -->
                             <b-tab title="Solventes" @click="setSubModulo('solventes')"></b-tab>
                             <b-tab title="Insolventes" @click="setSubModulo('insolventes')"></b-tab>
+                            <b-tab title="Desactivados" @click="setSubModulo('desactivados')"></b-tab>
+                            <b-tab title="Estadisticas" @click="setSubModulo('conteo')"></b-tab>
                             <b-tab title="Ajustes" @click="setSubModulo('ajustes')"></b-tab>
                             <!-- <b-tab title="Bloqueados" @click="setSubModulo('Bloqueados')"></b-tab> -->
                         </b-tabs>
@@ -50,6 +52,14 @@
                         <Insolventes />
                     </b-col>
 
+                    <b-col sm="12" v-if="submodulo == 'conteo'">
+                        <Estadisticas />
+                    </b-col>
+
+                    <b-col sm="12" v-if="submodulo == 'desactivados'">
+                        <Desactivados />
+                    </b-col>
+
                 </b-row>
             </b-container>
 
@@ -63,6 +73,8 @@ import Alumno from '@/components/Registros/Inscripciones/Alumno.vue'
 import BusquedaAvanzada from '@/components/Registros/Inscripciones/Alumno/Busqueda_avanzada.vue'
 import Solventes from './Inscripciones/Alumno/Solventes.vue'
 import Insolventes from './Inscripciones/Alumno/Insolventes.vue'
+import Estadisticas from './Inscripciones/Estadisticas/Conteo.vue'
+import Desactivados from './Inscripciones/Alumno/Desactivados.vue'
 
 //--> GIF ANIMADO PARA LAS DESCARGAS
 
@@ -81,7 +93,9 @@ export default {
         Ajustes,
         BusquedaAvanzada,
         Solventes,
-        Insolventes
+        Insolventes,
+        Desactivados,
+        Estadisticas
     },
     data() {
         return {
