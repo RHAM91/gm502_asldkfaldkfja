@@ -14,6 +14,11 @@ export default {
     computed:{
         ...mapState(['loading_'])
     },
+    watch:{
+        loading_: function(val){
+            this.$emit('resp', val)
+        }
+    }
 }
 </script>
 
@@ -24,5 +29,6 @@ export default {
         position: fixed;
         top: 0;
         right: 11px;
+        z-index: 999;
     }
 </style>
