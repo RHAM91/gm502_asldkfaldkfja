@@ -13,7 +13,11 @@
             <b-col sm="12" class="mt-3">
 
                 <b-table class="table-bordered table-striped" :items="r_alumnos" :fields="fields" :per-page="perPage" :current-page="currentPage" small style="font-size: 13px;">
-					
+                    <template v-slot:cell(no) = 'conta'>
+                        <div>
+                            {{conta.index + 1}}
+                        </div>
+					</template>
                     <template v-slot:cell(btn) = 'row'>
                         <div style="display: flex; justify-content:center;align-items:center;height: 40px;">
                             <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="abrir_modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
@@ -85,16 +89,20 @@ export default {
 			currentPage: 1,
             fields: [
                 {
+                    key: 'no',
+                    thStyle: 'width: 3%;',
+                },
+                {
                     key: 'codigo',
                     thStyle: 'width: 8%;',
                 },
                 {
                     key: 'nombre',
-                    thStyle: 'width: 20%;'
+                    thStyle: 'width: 21%;'
                 },
                 {
                     key: 'curso',
-                    thStyle: 'width: 14%;'
+                    thStyle: 'width: 10%;'
                 },
                 {
                     key: 'nivel',
