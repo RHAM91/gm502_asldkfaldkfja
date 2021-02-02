@@ -34,18 +34,33 @@
                             </h1>
                         </b-card-text>
                     </b-card>
+                    <b-card bg-variant="warning" text-variant="black" header="Desactivados" class="text-center">
+                        <b-card-text>
+                            <h1>
+                                {{cantidad_desactivados}}
+                            </h1>
+                        </b-card-text>
+                    </b-card>
                 </b-card-group>
             </b-col>
         </b-row>
+
+        <Pacman />
+
     </b-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import Pacman from '@/components/varios/_Loading.vue'
+
 export default {
     name: 'Estadisticas',
     computed:{
-        ...mapState(['alumnos'])
+        ...mapState(['alumnos', 'data_res'])
+    },
+    components:{
+        Pacman
     },
     data() {
         return {
@@ -53,7 +68,8 @@ export default {
             cantidad_solventes: 0,
             cantidad_insolventes: 0,
             cantidad_inhabilitados: 0,
-            cantidad_inicial: 0
+            cantidad_inicial: 0,
+            cantidad_desactivados: 0
         }
     },
     methods: {
@@ -69,10 +85,24 @@ export default {
 
             let inicial = this.alumnos.filter(solvente => solvente.estado == 'Inicial')
             this.cantidad_inicial = inicial.length
-        }
+        },
+        async conteo_desactivados(){
+            let info = {
+                api: 'alumnos/desactivados',
+                position: 0,
+                formulario: {
+                    info: 0 // realmente no estoy viendo nada, porque es una consulta para saber cuandos desactivados hay
+                }
+            }
+
+            await this.response_data(info)
+            this.cantidad_desactivados = this.data_res[0].conteo
+        },
+        ...mapActions(['response_data'])
     },
     mounted() {
         this.conteo()
+        this.conteo_desactivados()
     }
 }
 </script>
