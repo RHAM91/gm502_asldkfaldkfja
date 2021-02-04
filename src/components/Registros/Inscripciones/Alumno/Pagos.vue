@@ -67,22 +67,25 @@
                     <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
-                                <th style="width: 20%;">
+                                <th style="width: 15%;">
                                     Pago
                                 </th>
-                                <th style="width: 20%;">
-                                    Fecha
+                                <th style="width: 15%;text-align:center;">
+                                    Fecha de registro
                                 </th>
-                                <th style="width: 15%;">
+                                <th style="width: 10%;text-align:center;">
+                                    Mes pagado
+                                </th>
+                                <th style="width: 15%;text-align:center;">
                                     Tipo pago
                                 </th>
-                                <th style="width: 20%;">
+                                <th style="width: 20%;text-align:center;">
                                     No. Documento
                                 </th>
-                                <th style="width: 20%;">
+                                <th style="width: 15%;">
                                     Receptor
                                 </th>
-                                <th style="text-align: center;width: 5%;">
+                                <th style="text-align: center;width: 10%;">
                                     ...
                                 </th>
                             </tr>
@@ -92,19 +95,23 @@
                                 <td>
                                     Q{{item.monto}}
                                 </td>
-                                <td>
+                                <td style="text-align:center;">
                                     {{item.fecha | formato}}
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
+                                    {{item.mes}}
+                                </td>
+                                <td style="text-align:center;">
                                     {{item.tipodepago}}
                                 </td>
-                                <td>
+                                <td style="text-align:center;">
                                     {{item.deposito}}
                                 </td>
                                 <td>
                                     {{item.receptor}}
                                 </td>
                                 <td style="text-align: center;">
+                                    <b-button type="button" size="sm" variant="info" @click="editar(item._id)" style="margin-right: 5px;"><i class="fas fa-pen"></i></b-button>
                                     <b-button type="button" size="sm" variant="danger" @click="anular(item._id)"><i class="fas fa-minus-circle"></i></b-button>
                                 </td>
                             </tr>
@@ -114,6 +121,8 @@
             </b-row>
 
         </b-container>
+
+        <EditarPagos v-if="modal_editar_pagos" :id_edicion="id_edicion" :cod_alumno="codigo_alumno" v-on:cerrar_edicion="cerrar_modal_edicion" v-on:refresh="get_meses_pagados" />
 
     </div>
 </template>
@@ -125,16 +134,20 @@ import axios from 'axios'
 import moment from 'moment'
 import { mapActions } from 'vuex'
 import { pregunta } from '@/components/functions/alertas'
+import EditarPagos from '@/components/Registros/Pagos/EditarPagos.vue'
 
 
 export default {
     name: 'Pagos',
-    props:['codex'],
+    props:['codex', 'codigo_alumno'],
     filters:{
         formato: function(val){
             let newdate = moment(val).format('DD/MM/YYYY')
             return newdate
         }
+    },
+    components:{
+        EditarPagos
     },
     data() {
         return {
@@ -150,6 +163,8 @@ export default {
             octubre: false,
             noviembre: false,
             diciembre: false,
+            modal_editar_pagos: false,
+            id_edicion: '',
             yy: moment(Date.now()).format('YYYY'),
             pagos: []
 
@@ -244,6 +259,16 @@ export default {
                     this.get_meses_pagados()
                 }
             })
+        },
+        async editar(id){
+            this.modal_editar_pagos = true
+            this.id_edicion = id
+        },
+        cerrar_modal_edicion(){
+            this.modal_editar_pagos = false
+        },
+        refresh_datos(){
+            this.get_meses_pagados()
         },
         ...mapActions(['updateData'])
     },

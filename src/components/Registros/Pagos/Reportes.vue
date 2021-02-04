@@ -144,7 +144,6 @@ export default {
             }
 
             await this.response_data(info)
-
             this.datos_pagos = this.data_res[0]
 
             let contador = 0
