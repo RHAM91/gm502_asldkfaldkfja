@@ -8,6 +8,7 @@ import {
 import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import axios from 'axios'
+import os from 'os'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -124,6 +125,22 @@ ipcMain.on('app_version', (event)=>{
   buscarActualizacion() // BUSCAR ACTUALIZACION
 })
 
+// --> EVENTO PARA BUSCAR Y MOSTRAR DATOS DE EQUIPO
+
+ipcMain.on('app_info', (event)=>{
+
+  let info = {
+    nombre: os.hostname(),
+    empresa: 'Guatemusica',
+    programa: 'Academia alumnos',
+    version: app.getVersion(),
+    ip: '127.0.0.1'
+  }
+
+  event.sender.send('app_info', info) // ENVIA LA VERSION DEL SOFWARE
+})
+
+
 // --> EVENTO QUE APLICA ACTUALIZACION
 
 ipcMain.on('ok_update', (event) =>{ 
@@ -205,6 +222,9 @@ let offline_detect = async () =>{
 setInterval(() => {
   offline_detect()
 }, 5000);
+
+
+
 
 
 // Exit cleanly on request from parent process in development mode.

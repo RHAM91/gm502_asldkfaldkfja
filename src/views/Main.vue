@@ -125,6 +125,16 @@ export default {
             const { socket } = require('../config/sockets_config')
             this.ws(socket)
 
+            ipcRenderer.send('app_info');
+
+            ipcRenderer.on('app_info', (event, arg) => {
+                ipcRenderer.removeAllListeners('app_info');
+
+                socket.emit('cliente', arg)
+
+            });
+
+
             // socket.on('reconnect', ()=>{
             //     console.log('De nuevo en linea')
             // })
