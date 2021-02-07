@@ -74,7 +74,7 @@
                                     Fecha de registro
                                 </th>
                                 <th style="width: 10%;text-align:center;">
-                                    Mes pagado
+                                    Mes
                                 </th>
                                 <th style="width: 15%;text-align:center;">
                                     Tipo pago
@@ -101,7 +101,7 @@
                                 <td style="text-align: center;">
                                     {{item.mes}}
                                 </td>
-                                <td style="text-align:center;">
+                                <td :style=" item.tipodepago == 'mora' ? 'text-align: center;background-color: red;color: white' : 'text-align: center;'">
                                     {{item.tipodepago}}
                                 </td>
                                 <td style="text-align:center;">
@@ -186,31 +186,31 @@ export default {
             let meses = await axios.post(`http://${IP}:${PUERTO}/api/pagos/xmes`, info, this.$store.state.token)
             this.pagos = meses.data
 
-            meses.data.forEach(e => {
-                
-                if (e.mes == 'enero') {
+            meses.data.forEach(e => {                
+
+                if (e.mes == 'enero' && e.tipodepago != 'mora') {
                     this.enero = true
-                }else if(e.mes == 'febrero'){
+                }else if(e.mes == 'febrero' && e.tipodepago != 'mora'){
                     this.febrero = true
-                }else if(e.mes == 'marzo'){
+                }else if(e.mes == 'marzo' && e.tipodepago != 'mora'){
                     this.marzo = true
-                }else if(e.mes == 'abril'){
+                }else if(e.mes == 'abril' && e.tipodepago != 'mora'){
                     this.abril = true
-                }else if(e.mes == 'mayo'){
+                }else if(e.mes == 'mayo' && e.tipodepago != 'mora'){
                     this.mayo = true
-                }else if(e.mes == 'junio'){
+                }else if(e.mes == 'junio' && e.tipodepago != 'mora'){
                     this.junio = true
-                }else if(e.mes == 'julio'){
+                }else if(e.mes == 'julio' && e.tipodepago != 'mora'){
                     this.julio = true
-                }else if(e.mes == 'agosto'){
+                }else if(e.mes == 'agosto' && e.tipodepago != 'mora'){
                     this.agosto = true
-                }else if(e.mes == 'septiembre'){
+                }else if(e.mes == 'septiembre' && e.tipodepago != 'mora'){
                     this.septiembre = true
-                }else if(e.mes == 'octubre'){
+                }else if(e.mes == 'octubre' && e.tipodepago != 'mora'){
                     this.octubre = true
-                }else if(e.mes == 'noviembre'){
+                }else if(e.mes == 'noviembre' && e.tipodepago != 'mora'){
                     this.noviembre = true
-                }else if(e.mes == 'diciembre'){
+                }else if(e.mes == 'diciembre' && e.tipodepago != 'mora'){
                     this.diciembre = true
                 }
             });
