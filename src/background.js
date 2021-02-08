@@ -9,6 +9,7 @@ import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import axios from 'axios'
 import os from 'os'
+import macaddress from 'macaddress'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -127,6 +128,13 @@ ipcMain.on('app_version', (event)=>{
 
 // --> EVENTO PARA BUSCAR Y MOSTRAR DATOS DE EQUIPO
 
+let mmac = ''
+
+macaddress.one(function (err, mac) {
+  mmac = mac
+});
+
+
 ipcMain.on('app_info', (event)=>{
 
   let info = {
@@ -134,7 +142,7 @@ ipcMain.on('app_info', (event)=>{
     empresa: 'Guatemusica',
     programa: 'Academia alumnos',
     version: app.getVersion(),
-    ip: '127.0.0.1'
+    ip: mmac
   }
 
   event.sender.send('app_info', info) // ENVIA LA VERSION DEL SOFWARE
