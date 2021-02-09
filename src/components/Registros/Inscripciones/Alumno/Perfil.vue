@@ -124,14 +124,16 @@
                                                     <i class="fas fa-guitar"></i>
                                                 </td>
                                                 <td v-if="!btn_editar" style="width: 90%;">
-                                                    {{instrumento}}
+                                                    <b-button type="button" variant="outline-warning" @click="modalInstrumentos" size="sm">lista</b-button>
                                                 </td>
                                                 <td v-else style="width: 90%;">
                                                     <!-- <b-form-input type="text" size="sm" v-model="instrumento"></b-form-input> -->
-                                                    <select class="form-control form-control-sm" v-model="instrumento">
+                                                    <!-- <select class="form-control form-control-sm" v-model="instrumento">
                                                         <option value="">Selecciona</option>
                                                         <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
-                                                    </select>
+                                                    </select> -->
+                                                    <!-- <v-select :options="cursos" label="curso" :reduce="curso => curso.curso" name="states[]" multiple="multiple" v-model="instrumento"></v-select> -->
+                                                    <b-button type="button" variant="warning" size="sm">listax</b-button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -200,22 +202,25 @@
         </div>
 
         <Pagos v-if="modal_pagos" :codex="codigo" :codigo_alumno="codigo" v-on:cerrar_modal="cerrar_modal_pagos" />
-
+        <ModalInstrumentos v-if="modal_instrumentos" :codigo_alumno="codigo" v-on:cerrar_modal="cerrar_modalInstrumentos" />
     </div>
 </template>
 
 <script>
 
+
 import {pregunta} from '@/components/functions/alertas'
 import { mapActions, mapState } from 'vuex'
 
 import Pagos from './Pagos.vue'
+import ModalInstrumentos from './Modal_Lista_Insrumentos.vue'
 
 export default {
     name: 'Perfil',
     props:['id'],
     components:{
-        Pagos
+        Pagos,
+        ModalInstrumentos
     },
     computed:{
         ...mapState(['alumnos', 'paises', 'ciudades', 'cursos', 'regiones', 'pastores', 'iglesias', 'docentes'])
@@ -230,6 +235,7 @@ export default {
         return {
             btn_editar: false,
             modal_pagos: false,
+            modal_instrumentos: false,
             codigo: '',
             nombre: '',
             telefono: '',
@@ -339,6 +345,12 @@ export default {
             await this.wse(this.$store.state.rutas.alumnos)
 
             this.editar()
+        },
+        modalInstrumentos(){
+            this.modal_instrumentos = true
+        },
+        cerrar_modalInstrumentos(){
+            this.modal_instrumentos = false
         },
         ...mapActions(['deleteData', 'updateData', 'wse'])
     },
