@@ -42,11 +42,18 @@
                     </table>
                 </div>
             </b-col>
-            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
+            <b-col sm="12" md="3" class="mt-3" v-if="alumno_info != ''">
                 <label>Monto a pagar</label>
                 <b-form-input type="number" size="sm" v-model="monto" step="0.01" placeholder="Q"></b-form-input>
             </b-col>
-            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
+            <b-col sm="12" md="3" class="mt-3" v-if="alumno_info != ''">
+                <label>Instrumento</label>
+                <select class="form-control form-control-sm" v-model="curso">
+                    <option value="">Selecciona</option>
+                    <option v-for="(item, index) in instrumentos" :key="index" :value="item.curso">{{item.curso}}</option>
+                </select>
+            </b-col>
+            <b-col sm="12" md="3" class="mt-3" v-if="alumno_info != ''">
                 <label>Mes</label>
                 <select class="form-control form-control-sm" v-model="mes">
                     <option value="">Selecciona</option>
@@ -64,7 +71,7 @@
                     <option value="diciembre">Diciembre</option>
                 </select>
             </b-col>
-            <b-col sm="12" md="4" class="mt-3" v-if="alumno_info != ''">
+            <b-col sm="12" md="3" class="mt-3" v-if="alumno_info != ''">
                 <label>Año</label>
                 <select class="form-control form-control-sm" v-model="year">
                     <option value="">Selecciona</option>
@@ -105,7 +112,7 @@
         </b-row>
 
         <BuscarAlumno v-if="modal_buscar_alumnos" v-on:codigo_alumno="selecciona_alumno" v-on:cerrar_modal="cerrar_modal_busqueda_alumno" />
-
+        <Pacman />
 
     </b-container>
 </template>
@@ -113,6 +120,7 @@
 <script>
 
 import BuscarAlumno from './BuscarAlumno.vue'
+import Pacman from '@/components/varios/_Loading.vue'
 
 import moment from 'moment'
 import { mapActions, mapState } from 'vuex'
@@ -121,10 +129,11 @@ import {minix} from '@/components/functions/alertas'
 export default {
     name: 'Pagos',
     components:{
-        BuscarAlumno
+        BuscarAlumno,
+        Pacman
     },
     computed: {
-        ...mapState(['alumnos'])
+        ...mapState(['alumnos', 'data_res'])
     },
     data() {
         return {
@@ -133,6 +142,8 @@ export default {
             mes: '',
             tipodepago: '',
             deposito: '',
+            instrumentos: [],
+            curso: '',
             modal_buscar_alumnos: false,
             fecha: moment(Date.now()).format('YYYY-MM-DD'),
             alumno_info: '',
@@ -150,6 +161,7 @@ export default {
         ejectuar_busqueda(){
             let info = this.alumnos.filter(alumno => alumno.codigo == this.buscar) 
             this.alumno_info = info[0]
+            this.getInstrumentos()
 
         },
         selecciona_alumno(codigo){
@@ -169,6 +181,7 @@ export default {
                         alumno: this.alumno_info.nombre,
                         codigo_alumno: this.alumno_info.codigo,
                         mes: this.mes,
+                        curso: this.curso,
                         tipodepago: this.tipodepago,
                         deposito: this.deposito,
                         fecha: this.fecha,
@@ -184,7 +197,19 @@ export default {
             }
 
         },
-        ...mapActions(['insert_data', 'wse'])
+        async getInstrumentos(){
+            let info = {
+                api: 'cursos/asignados',
+                position: 0,
+                formulario: {
+                    codigo: this.buscar
+                }
+            }
+
+            await this.response_data(info)
+            this.instrumentos = this.data_res[0]
+        },
+        ...mapActions(['insert_data', 'wse', 'response_data'])
     },
     mounted() {
         document.getElementById('campo_busqueda_pago').focus()

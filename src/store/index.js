@@ -319,7 +319,7 @@ export default new Vuex.Store({
                 var x = parametro.split(' ')
                 var regex = "^(?=.*\\b" + x.join("\\b)(?=.*\\b") + "\\b)"
 
-                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.curso.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
+                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
 
                 return filtro
 
@@ -336,7 +336,7 @@ export default new Vuex.Store({
                 var x = parametro.split(' ')
                 var regex = "^(?=.*\\b" + x.join("\\b)(?=.*\\b") + "\\b)"
 
-                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.curso.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
+                var filtro = state.alumnos.filter(alumno => filtrar_acentos(alumno.nombre.toLowerCase()).match(regex) || filtrar_acentos(alumno.codigo.toLowerCase()).match(regex) || filtrar_acentos(alumno.iglesia.toLowerCase()).match(regex) || filtrar_acentos(alumno.pastor.toLowerCase()).match(regex))
 
                 return filtro
 

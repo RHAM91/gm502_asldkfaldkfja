@@ -1,6 +1,6 @@
 <template>
     <div class="contenedor_modal">
-        <div class="cuerpo_modal" style="height: 680px;width: 850px">
+        <div class="cuerpo_modal" style="height: 750px;width: 850px">
             <div class="modal_banner dd">
                 <i class="fas fa-plus" style="margin-right: 5px;"></i>Registro alumno
             </div>
@@ -75,7 +75,19 @@
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_regiones"><i class="fas fa-plus"></i></b-button>
                         </b-col>
-                        <b-col sm="12" md="3" class="mt-3">
+                        <b-col sm="12" md="11" class="mt-3">
+                            <label>Curso</label>
+                            <!-- <select class="form-control form-control-sm" v-model="curso" required>
+                                <option value="">Seleccionar</option>
+                                <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
+                            </select> -->
+
+                            <v-select :options="cursos" label="curso" :reduce="curso => curso.curso" name="states[]" multiple="multiple" v-model="curso"></v-select>
+                        </b-col>
+                        <b-col sm="12" md="1" class="mt-5">
+                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_cursos"><i class="fas fa-plus"></i></b-button>
+                        </b-col>
+                        <b-col sm="12" md="7" class="mt-3">
                             <label>Docente</label>
                             <select class="form-control form-control-sm" v-model="docente" >
                                 <option value="">Seleccionar</option>
@@ -86,18 +98,7 @@
                         <b-col sm="12" md="1" class="mt-5">
                             <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_docentes"><i class="fas fa-plus"></i></b-button>
                         </b-col>
-                        <b-col sm="12" md="3" class="mt-3">
-                            <label>Curso</label>
-                            <!-- <select class="form-control form-control-sm" v-model="curso" required>
-                                <option value="">Seleccionar</option>
-                                <option v-for="(item, index) in cursos" :key="index" :value="item.curso">{{item.curso}}</option>
-                            </select> -->
-
-                            <v-select :options="cursos" label="curso" :reduce="curso => curso.curso" v-model="curso"></v-select>
-                        </b-col>
-                        <b-col sm="12" md="1" class="mt-5">
-                            <b-button type="button" size="sm" variant="outline-warning" @click="abrir_modal_cursos"><i class="fas fa-plus"></i></b-button>
-                        </b-col>
+                        
                         <b-col sm="12" md="4" class="mt-3">
                             <label>Nivel</label>
                             <select class="form-control form-control-sm" v-model="nivel" required>
@@ -147,7 +148,7 @@
         <Regiones v-if="reg_regiones" v-on:cerrar_modal="cerrar_modal_regiones" :externo="true"/>
         <Docentes v-if="reg_docentes" v-on:cerrar_modal="cerrar_modal_docentes" :externo="true"/>
         <Cursos v-if="reg_cursos" v-on:cerrar_modal_cursos="cerrar_modal_cursos" :externo="true"/>
-    
+
     </div>
 </template>
 
@@ -228,7 +229,7 @@ export default {
             let data = {
                 api: 'alumnos',
                 formulario: {
-                    nombre: this.nombre,
+                    nombre: this.nombre.trim(),
                     apellidos: this.apellidos,
                     telefono: this.telefono,
                     correo: this.correo,

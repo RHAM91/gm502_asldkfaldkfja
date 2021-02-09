@@ -67,22 +67,25 @@
                     <table class="table table-sm table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
-                                <th style="width: 15%;">
+                                <th style="width: 10%;">
                                     Pago
                                 </th>
-                                <th style="width: 15%;text-align:center;">
+                                <th style="width: 10%;text-align:center;">
                                     Fecha de registro
                                 </th>
                                 <th style="width: 10%;text-align:center;">
                                     Mes
                                 </th>
                                 <th style="width: 15%;text-align:center;">
+                                    Instrumento
+                                </th>
+                                <th style="width: 15%;text-align:center;">
                                     Tipo pago
                                 </th>
-                                <th style="width: 20%;text-align:center;">
+                                <th style="width: 15%;text-align:center;">
                                     No. Documento
                                 </th>
-                                <th style="width: 15%;">
+                                <th style="width: 15%;text-align:center;">
                                     Receptor
                                 </th>
                                 <th style="text-align: center;width: 10%;">
@@ -101,13 +104,16 @@
                                 <td style="text-align: center;">
                                     {{item.mes}}
                                 </td>
+                                <td style="text-align: center;">
+                                    {{item.curso}}
+                                </td>
                                 <td :style=" item.tipodepago == 'mora' ? 'text-align: center;background-color: red;color: white' : 'text-align: center;'">
                                     {{item.tipodepago}}
                                 </td>
                                 <td style="text-align:center;">
                                     {{item.deposito}}
                                 </td>
-                                <td>
+                                <td style="text-align:center;">
                                     {{item.receptor}}
                                 </td>
                                 <td style="text-align: center;">
