@@ -18,6 +18,13 @@
                             {{conta.index + 1}}
                         </div>
 					</template>
+                    <template v-slot:cell(curso) = 'cursoe'>
+                        <div>
+                            <div style="display: flex; justify-content:center;align-items:center;height: 40px;">
+                                <b-button type="button" size="sm" title="Lista instrumentos" variant="outline-info" :id="`btn-see-instrumento-${cursoe.item._id}`" @click="abrir_modal_instrumentos(cursoe.item.codigo)"><i class="far fa-eye"></i></b-button>
+                            </div> 
+                        </div>
+					</template>
                     <template v-slot:cell(btn) = 'row'>
                         <div style="display: flex; justify-content:center;align-items:center;height: 40px;">
                             <b-button type="button" size="sm" title="Ficha alumno" variant="warning" @click="abrir_modal_ficha(row.item._id)"><i class="fas fa-info-circle"></i></b-button>
@@ -48,6 +55,8 @@
         <div class="btn_flotante_add" @click="abrir_modal_registro">
             <i class="fas fa-plus"></i>
         </div>
+
+        <ListInstrumentos v-if="modal_instrumentos" :codigo_alumno="codigo" v-on:cerrar_modal="cerrar_modalInstrumentos" />
     </b-container>
 </template>
 
@@ -55,6 +64,7 @@
 
 import Registro from './Alumno/Registro.vue'
 import Perfil from './Alumno/Perfil.vue'
+import ListInstrumentos from './Alumno/Modal_Lista_Insrumentos'
 
 import { mapGetters, mapState } from 'vuex'
 export default {
@@ -78,15 +88,20 @@ export default {
     },
     components:{
         Registro,
-        Perfil
+        Perfil,
+        ListInstrumentos
     },
     data() {
         return {
             modal_registro: false,
             modal_perfil: false,
+            modal_instrumentos: false,
+            codigo: '',
             id: '',
             perPage: 15,
             currentPage: 1,
+            instrumentos: [],
+            version: 'hola',
             fields: [
                 {
                     key: 'no',
@@ -102,11 +117,11 @@ export default {
                 },
                 {
                     key: 'curso',
-                    thStyle: 'width: 10%;'
+                    thStyle: 'width: 10%;text-align: center;'
                 },
                 {
                     key: 'nivel',
-                    thStyle: 'width: 5%;'
+                    thStyle: 'width: 5%;text-align: center;'
                 },
                 {
                     key: 'telefono',
@@ -141,6 +156,13 @@ export default {
         abrir_modal_ficha(id){
             this.modal_perfil = true
             this.id = id
+        },
+        abrir_modal_instrumentos(codigo){
+            this.modal_instrumentos = true,
+            this.codigo = codigo
+        },
+        cerrar_modalInstrumentos(){
+            this.modal_instrumentos = false
         },
         cerrar_modal_ficha(){
             this.modal_perfil = false

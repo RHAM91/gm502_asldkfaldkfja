@@ -48,7 +48,7 @@
             </b-col>
             <b-col sm="12" md="3" class="mt-3" v-if="alumno_info != ''">
                 <label>Instrumento</label>
-                <select class="form-control form-control-sm" v-model="curso">
+                <select class="form-control form-control-sm" v-model="curso" required>
                     <option value="">Selecciona</option>
                     <option v-for="(item, index) in instrumentos" :key="index" :value="item.curso">{{item.curso}}</option>
                 </select>
@@ -171,7 +171,7 @@ export default {
         },
         async guardar(){
 
-            if (this.monto == '' || this.mes == '' || this.fecha == '' || this.tipodepago == '') {
+            if (this.monto == '' || this.mes == '' || this.fecha == '' || this.tipodepago == '' || this.curso == '') {
                 minix({icon: 'error', mensaje: 'Uno o más campos están vacios', tiempo: 3000})
             }else{
                 let info = {
