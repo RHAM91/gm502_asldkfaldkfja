@@ -155,6 +155,12 @@ ipcMain.on('ok_update', (event) =>{
   autoUpdater.quitAndInstall()
 })
 
+// --> EVENTO PARA IR A LA APP WEB
+
+ipcMain.on('aviso', (event) =>{ 
+  shell.openExternal('http://157.230.60.183/academia')
+})
+
 // --> EVENTO PARA EJECUTAR ORDEN Y VER PDF
 
 ipcMain.on('vale_salida', (event, args)=>{

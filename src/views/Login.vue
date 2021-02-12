@@ -1,155 +1,64 @@
 <template>
-    <div class="cuerpo">
-        <div class="cuadro1">
-            <div class="cuadrologo">
-                <div class="logotipo">
-                    <img src="@/assets/logo1.png" alt="" style="width: 100%;">
+    <b-container fluid >
+        <b-row>
+            <b-col sm="12" class="mt-5 d-flex justify-content-center">
+                <div class="rocket">
+                    <img src="@/assets/startup.png" style="width: 100%;" alt="">
                 </div>
-            </div>
-            <footer>
-                Powered by SIA
-            </footer>
-        </div>
-        <div class="cuadro2">
-            <div class="cuadrologin">
-                <b-container fluid>
-                    <form @submit.prevent="login">
-                        <b-row>
-                            <b-col sm="12">
-                                <h1 class="tit">Iniciar sesión</h1>
-                            </b-col>
-                            <b-col sm="12" class="mt-4">
-                                
-                                <b-form-input type="text" size="sm" v-model="usuario" placeholder="Usuario" required=""></b-form-input>
-                            </b-col>
+            </b-col>
+            <b-col sm="12" class="mt-5 d-flex justify-content-center">
+                <h1>
+                    Nos mudamos!!
+                </h1>
+            </b-col>
+            <b-col sm="12" class="mt-5">
+                <p style="font-size: 20px;">
+                    Debido a las pláticas que tuvimos, llegamos a la conclusión que será mucho mejor tener una app directamente en la nube, por lo cual el sistema ha sido mudado a un servidor web. La app seguirá siendo la misma solo que en algún lugar del espacio.
+                </p>
 
-                            <b-col sm="12" class="mt-2">
-                                <b-form-input type="password" size="sm" v-model="password" placeholder="Contraseña" required=""></b-form-input>
-                            </b-col>
-                            <b-col sm="12" class="mt-3">
-                                
-                                <b-button type="submit" size="small" variant="dark" block pill>Entrar</b-button>
-                            </b-col>
-                        </b-row>
-                    </form>
-                </b-container>
-                
-            </div>
-            
-        </div>
-    </div>
+                <p style="font-size: 20px;">
+                    Te pido encarecidamente que uses <b>Google Chrome, Chrome Edge</b> o cualquier navegador basado en <b>Chromium</b> para sacarle el mayor provecho al sistema.
+                </p>
+                <p style="font-size: 20px;">
+                    Habiendo dicho esto....
+                </p>
+            </b-col>
+            <b-col sm="12" class="mt-4 d-flex justify-content-center">
+                <p style="font-size: 20px;">
+                    Presiona el siguiente botón que te deberá llevar a la nueva app.
+                </p>
+            </b-col>
+            <b-col sm="12" class="mt-4 d-flex justify-content-center">
+                <b-button type="button" size="lg" variant="primary" @click="go_sitio">Ir al sitio</b-button>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
 
-import axios from 'axios'
-import { mapState, mapActions, mapMutations } from 'vuex'
-import { minix } from '../components/functions/alertas'
-import { IP, PUERTO } from '../config/parametros'
+import { ipcRenderer } from 'electron'
 
 export default {
-    data(){
-        return{
-            usuario: '',
-            password: '',
+    name: 'Aviso',
+    data() {
+        return {
+            
         }
     },
-    computed:{
-        ...mapState(['token'])
+    methods: {
+        go_sitio(){
+            ipcRenderer.send('aviso')
+        }
     },
-    methods:{
-        login: async function(){
-
-            let formulario = {
-                username: this.usuario,
-                password: this.password
-            }
-
-            try {
-                
-                let data = await axios.post(`http://${IP}:${PUERTO}/api/auth/login`, formulario)
-    
-                if(data.data.message == 'PASSWORD INCORRECTO'){
-    
-                    minix({icon: 'error', mensaje: 'Contraseña incorrecto', tiempo: 3000})
-    
-                }else if(data.data.message == 'EL USUARIO NO EXISTE'){
-    
-                    minix({icon: 'error', mensaje: 'Usuario no existe', tiempo: 3000})
-    
-                }else{
-                    this.get_token(data.data.token)
-                    this.set_t2(data.data.token)
-
-                    this.$router.replace('Main')
-    
-                }
-
-            } catch (e) {
-                minix({icon: 'error', mensaje: e.response.data.message, tiempo: 3000})
-            }
-
-        
-            
-        },
-        ...mapActions(['get_token']),
-        ...mapMutations(['set_t2'])
-   
-    }
 }
 </script>
 
-<style scoped>
-    .cuerpo{
-        width: 100%;
-        height: 100vh;
-        display: flex;
+<style>
+    .rocket{
 
+        width: 200px;
+        height: 200px;
+        
     }
-        .cuadro1{
-            width: 50%;
-            height: 100%;
-            background-color: rgb(0,0,0);
-            position: relative;
-        }
-        .cuadro2{
-            width: 50%;
-            height: 100%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-            .cuadrologin{
-                width: 300px;
-                height: auto;
-            }
-                .tit{
-                    text-align: center;
-                    color: black;
-                }
-
-        footer{
-            width: 100%;
-            height: auto;
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            text-align: center;
-            color: rgb(199, 206, 212)
-        }
-
-        .cuadrologo{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none;
-
-        }
-            .logotipo{
-                width: 300px;
-                height: 300px;
-            }
 </style>
