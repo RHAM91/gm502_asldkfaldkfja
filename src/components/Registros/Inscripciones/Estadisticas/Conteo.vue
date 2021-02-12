@@ -1,6 +1,11 @@
 <template>
     <b-container fluid>
         <b-row>
+            <b-col sm="12" class="mt-2">
+                <h2>
+                    General
+                </h2>
+            </b-col>
             <b-col sm="12" class="mt-3">
                 <b-card-group deck>
                     <b-card bg-variant="primary" text-variant="white" header="Inscritos" class="text-center">
@@ -43,6 +48,41 @@
                     </b-card>
                 </b-card-group>
             </b-col>
+            <b-col sm="12" class="mt-5">
+                <h2>
+                    Por instrumento
+                </h2>
+            </b-col>
+            <b-col sm="12" class="mt-3">
+                <table class="table table-sm table-striped table-bordered" style="font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 45%;">
+                                Instrumento
+                            </th>
+                            <th style="width: 45%;">
+                                Cantidad de alumnos
+                            </th>
+                            <th style="width: 10%; text-align: center;">
+                                ...
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Guitarra
+                            </td>
+                            <td>
+                                150
+                            </td>
+                            <td style="text-align: center;">
+                                <b-button type="button" size="sm" variant="warning">eye</b-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </b-col>
         </b-row>
 
         <Pacman />
@@ -57,7 +97,7 @@ import Pacman from '@/components/varios/_Loading.vue'
 export default {
     name: 'Estadisticas',
     computed:{
-        ...mapState(['alumnos', 'data_res'])
+        ...mapState(['alumnos', 'data_res', 'cursos'])
     },
     components:{
         Pacman
@@ -69,7 +109,8 @@ export default {
             cantidad_insolventes: 0,
             cantidad_inhabilitados: 0,
             cantidad_inicial: 0,
-            cantidad_desactivados: 0
+            cantidad_desactivados: 0,
+            curso: ''
         }
     },
     methods: {
